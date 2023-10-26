@@ -10,7 +10,13 @@ const Welcome = () => {
       <div className='relative z-10 h-screen'>
         {' '}
         <Navbar />
-        <Button />
+        <div className='text-gray-100 flex flex-col mt-20 mx-auto justify-center w-80'>
+          <p className='text-sm text-center'>Enjoy delicious and affordable dishes &</p>
+          <h1 className='sm: text-2xl md:text-5xl mb-20 tracking-wider text-center'>Taste The Difference</h1>
+          <div className='self-center'>
+            <Button />
+          </div>
+        </div>
       </div>
     </div>
   );

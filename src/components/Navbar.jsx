@@ -2,7 +2,6 @@ import React from 'react';
 import Menu from './Menu';
 import Link from 'next/link';
 import Cart from './Cart';
-import Image from 'next/image';
 import { Pacifico } from 'next/font/google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
