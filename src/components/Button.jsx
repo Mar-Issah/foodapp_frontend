@@ -2,7 +2,9 @@ import React from 'react';
 
 const Button = () => {
   return (
-    <button className='bg-white bg-opacity-20 text-white p-2 border-4 border-orange-500 rounded-full'>Button</button>
+    <button className='bg-transparent text-gray-100 p-4 border-4 border-custom-orange rounded-full shadow-lg hover:bg-custom-orange w-40'>
+      Button
+    </button>
   );
 };
 
