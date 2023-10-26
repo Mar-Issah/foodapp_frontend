@@ -3,7 +3,7 @@ export const featuredProducts = [
     id: 1,
     title: 'Sicilian',
     desc: 'Ignite your taste buds with a fiery combination of spicy pepperoni, jalapeños, crushed red pepper flakes, and melted mozzarella cheese, delivering a kick with every bite.',
-    img: 'https://res.cloudinary.com/dytnpjxrd/image/upload/v1649855885/ZENC/pexels-tom-swinnen-1309778_vdrsg1.jpg',
+    img: '/public/sample.jpg',
     price: 24.9,
     options: [
       {
