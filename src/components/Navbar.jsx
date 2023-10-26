@@ -2,14 +2,9 @@ import React from 'react';
 import Menu from './Menu';
 import Link from 'next/link';
 import Cart from './Cart';
-import { Pacifico } from 'next/font/google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
-
-const pacifico = Pacifico({
-  subsets: ['latin'],
-  weight: ['400'],
-});
+import styles from '@/styles/navbar.module.css';
 
 const Navbar = () => {
   const user = false;
@@ -18,7 +13,7 @@ const Navbar = () => {
       {/* LOGO */}
       <div className='text-xl md:font-bold flex-1 tracking-widest'>
         <Link href='/'>
-          h.a.m <span className={`${pacifico.className} lowercase tracking-normal`}>foods</span>
+          h.a.m <span className={styles.fontPacifico}>foods</span>
         </Link>
       </div>
 
@@ -30,7 +25,9 @@ const Navbar = () => {
       <div className='hidden md:flex gap-4 items-center justify-end flex-1'>
         <div className='flex items-center gap-2 cursor-pointer bg-custom-orange px-1 rounded-md'>
           <FontAwesomeIcon icon={faPhone} style={{ color: '#bfc7d4', height: '1rem' }} />
-          <span>+233 123 456 789</span>
+          <span>
+            <a href='tel:+1234567890'>(+233) 567-890</a>
+          </span>
         </div>
         <Link href='/'>Home</Link>
         <Link href='/menu'>Menu</Link>

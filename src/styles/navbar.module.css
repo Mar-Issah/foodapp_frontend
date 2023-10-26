@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap');
+
+.fontPacifico{
+  font-family: 'Pacifico', cursive;
+  letter-spacing: 0em;
+  text-transform: lowercase;
+}

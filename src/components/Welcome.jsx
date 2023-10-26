@@ -3,6 +3,7 @@ import React from 'react';
 import styles from '@/styles/home.module.css';
 import Navbar from '@/components/Navbar';
 import Button from './Button';
+import Link from 'next/link';
 
 const Welcome = () => {
   return (
@@ -11,11 +12,12 @@ const Welcome = () => {
         {' '}
         <Navbar />
         <div className='text-gray-100 flex flex-col mt-20 mx-auto justify-center w-80'>
-          <p className='text-sm text-center'>Enjoy delicious and affordable dishes &</p>
+          <p className='text-sm text-center mb-3'>Enjoy delicious and affordable dishes &</p>
           <h1 className='sm: text-2xl md:text-5xl mb-20 tracking-wider text-center'>Taste The Difference</h1>
-          <div className='self-center'>
-            <Button />
-          </div>
+
+          <Link href='/menu' className='self-center'>
+            <Button label='View Menu' />
+          </Link>
         </div>
       </div>
     </div>
