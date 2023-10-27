@@ -366,4 +366,28 @@ export const menu = [
     img: '/temporary/m3.png',
     color: 'white',
   },
+  {
+    id: 3,
+    slug: 'pizzas',
+    title: 'Cheesy Pizzas',
+    desc: 'Pizza Paradise: Irresistible slices, mouthwatering toppings, and cheesy perfection.',
+    img: '/temporary/m3.png',
+    color: 'white',
+  },
+  {
+    id: 3,
+    slug: 'pizzas',
+    title: 'Cheesy Pizzas',
+    desc: 'Pizza Paradise: Irresistible slices, mouthwatering toppings, and cheesy perfection.',
+    img: '/temporary/m3.png',
+    color: 'white',
+  },
+  {
+    id: 3,
+    slug: 'pizzas',
+    title: 'Cheesy Pizzas',
+    desc: 'Pizza Paradise: Irresistible slices, mouthwatering toppings, and cheesy perfection.',
+    img: '/temporary/m3.png',
+    color: 'white',
+  },
 ];
