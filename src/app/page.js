@@ -1,3 +1,9 @@
+import Welcome from '@/components/Welcome';
+
 export default function Home() {
-  return <main>hello</main>;
+  return (
+    <main className='w-screen'>
+      <Welcome />
+    </main>
+  );
 }
