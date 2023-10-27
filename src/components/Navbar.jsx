@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Cart from './Cart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import styles from '@/styles/navbar.module.css';
+import styles from '@/styles/fonts.module.css';
 
 const Navbar = () => {
   const user = false;
@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className='flex items-center gap-2 cursor-pointer bg-custom-orange px-1 rounded-md'>
           <FontAwesomeIcon icon={faPhone} style={{ color: '#bfc7d4', height: '1rem' }} />
           <span>
-            <a href='tel:+1234567890'>(+233) 567-890</a>
+            <a href='tel:+2335678900'>(+233) 567-8900</a>
           </span>
         </div>
         <Link href='/'>Home</Link>

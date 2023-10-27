@@ -2,6 +2,7 @@ import { featuredProducts } from '@/data';
 import React from 'react';
 import styles from '@/styles/home.module.css';
 import Navbar from '@/components/Navbar';
+import Notice from '@/components/Notice';
 import Button from './Button';
 import Link from 'next/link';
 
@@ -9,7 +10,7 @@ const Welcome = () => {
   return (
     <div className={`${styles.backgroundImage} w-screen`}>
       <div className='relative z-10 h-screen'>
-        {' '}
+        <Notice />
         <Navbar />
         <div className='text-gray-100 flex flex-col mt-20 mx-auto justify-center w-80'>
           <p className='text-sm text-center mb-3'>Enjoy delicious and affordable dishes &</p>

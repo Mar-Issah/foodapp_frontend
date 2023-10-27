@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import styles from '@/styles/navbar.module.css';
+import styles from '@/styles/fonts.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +11,7 @@ const LoginPage = () => {
       <div className='flex flex-1 items-center justify-center h-screen w-screen'>
         <div className='w-screen h-screen flex flex-col md:flex-row '>
           <div className='relative h-1/3 w-full md:h-full'>
-            <Image src='loginBG.jpg' alt='' fill className='object-cover' />
+            <Image src='/loginBG.jpg' alt='' fill className='object-cover' />
           </div>
           <div className='bg-orange-100 p-10 flex flex-col gap-8 md:w-1/2'>
             <h1 className='font-bold text-xl xl:text-3xl uppercase'>

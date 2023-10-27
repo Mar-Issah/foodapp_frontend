@@ -5,3 +5,7 @@
   letter-spacing: 0em;
   text-transform: lowercase;
 }
+
+.fontDancing{
+  font-family: 'Dancing Script', cursive;
+}
