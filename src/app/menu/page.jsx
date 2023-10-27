@@ -5,18 +5,19 @@ import Navbar from '@/components/Navbar';
 import Button from '@/components/Button';
 import styles from '@/styles/menu.module.css';
 import Image from 'next/image';
+import Footer from '@/components/Footer';
 
 const MenuPage = () => {
   return (
     <div className='bg-custom-blueblack'>
       <Navbar />
       <div className={`${styles.backgroundImage} w-screen relative z-10 text-gray-200`}>
-        <div className={`${styles.fontDancing} w-4/5 flex flex-col justify-end items-end`}>
+        <div className={`${styles.fontDancing} w-4/5 flex flex-col justify-end items-end mt-10`}>
           <h1 className='text-center sm:text-1xl md:text-2xl'>We serve</h1>
           <h1 className='relative z-10 text-gray-200 sm:text-1xl md:text-3xl'>TRADITIONAL & MODERN</h1>
         </div>
       </div>
-      <div className='lg:px-20 xl:px-40 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-center items-center pb-4'>
+      <div className='lg:px-20 xl:px-40 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-center items-center pb-15'>
         {menu.map((category) => (
           <Link
             href={`/product/${category.id}`}
@@ -36,6 +37,7 @@ const MenuPage = () => {
           </Link>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };
