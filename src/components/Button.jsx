@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Button = ({ label }) => {
+const Button = ({ label, ...props }) => {
   return (
-    <button className='bg-transparent text-gray-100 p-3 border-2 border-custom-orange rounded-full shadow-lg hover:bg-custom-orange sm:w-20 md:w-40'>
+    <button {...props} className='bg-transparent text-gray-100 p-2 border-2 border-custom-orange rounded-full shadow-lg hover:bg-custom-orange '>
       {label}
     </button>
   );
