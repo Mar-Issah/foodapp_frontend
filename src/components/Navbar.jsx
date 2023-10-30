@@ -7,7 +7,7 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import styles from '@/styles/fonts.module.css';
 
 const Navbar = () => {
-  const user = false;
+  const user = true;
   return (
     <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-20 xl:px-40'>
       {/* LOGO */}
@@ -37,11 +37,12 @@ const Navbar = () => {
           <>
             <Link href='/orders'>Orders</Link>
             <Cart />
+            <Link href='/'>Logout</Link>
           </>
         )}
       </div>
-    </div>
-  );
-};
+     </div>
+   );
+  };
 
 export default Navbar;

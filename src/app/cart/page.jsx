@@ -3,6 +3,8 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CartPage = () => {
   return (
@@ -16,7 +18,9 @@ const CartPage = () => {
             <Image src='/loginBG.jpg' alt='' width={100} height={100} />
             <h1 className='uppercase text-xl font-bold'>sicilian</h1>
             <h2 className='font-bold'>$79.90</h2>
-            <span className='cursor-pointer text-red'>X</span>
+            <span className='cursor-pointer text-red'>
+              <FontAwesomeIcon icon={faXmark} style={{ color: '#d51515' }} />
+            </span>
           </div>
           {/* SINGLE ITEM */}
           <div className='flex items-center justify-between mb-4'>
