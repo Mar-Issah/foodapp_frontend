@@ -22,12 +22,6 @@ const SingleProductPage = () => {
           <h1 className='text-3xl font-bold uppercase xl:text-5xl'>{singleProduct.title}</h1>
           <p>{singleProduct.desc}</p>
           <Price price={singleProduct.price} id={singleProduct.id} />
-          <button
-            onClick={() => console.log('cart')}
-            className='uppercase w-56 bg-custom-orange text-gray-200  p-3 ring-1 ring-custom-orange'
-          >
-            Add to Cart
-          </button>
         </div>
       </div>
       <Footer />

@@ -26,10 +26,7 @@ const Price = ({ price, id, options }) => {
           </div>
         </div>
         {/* CART BUTTON */}
-        <button
-          onClick={() => console.log('cart')}
-          className='uppercase w-56 bg-custom-orange text-gray-200  p-3 ring-1 ring-custom-orange'
-        >
+        <button className='uppercase w-56 bg-custom-orange text-gray-200  p-3 ring-1 ring-custom-orange'>
           Add to Cart
         </button>
       </div>
