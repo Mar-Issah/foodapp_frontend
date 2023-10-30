@@ -9,9 +9,9 @@ import styles from '@/styles/fonts.module.css';
 const Navbar = () => {
   const user = true;
   return (
-    <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-20 xl:px-40'>
+    <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
       {/* LOGO */}
-      <div className='text-xl md:font-bold flex-1 tracking-widest'>
+      <div className='text-xl md:font-bold flex-1 tracking-widest pl-4'>
         <Link href='/'>
           h.a.m <span className={styles.fontPacifico}>foods</span>
         </Link>
@@ -41,8 +41,8 @@ const Navbar = () => {
           </>
         )}
       </div>
-     </div>
-   );
-  };
+    </div>
+  );
+};
 
 export default Navbar;

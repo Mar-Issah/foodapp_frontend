@@ -17,7 +17,7 @@ const Welcome = () => {
             <h1 className='sm: text-2xl md:text-5xl mb-20 tracking-wider text-center'>Taste The Difference</h1>
 
             <Link href='/menu' className='self-center'>
-              <Button label='View Menu' />
+              <Button label='View & Order' />
             </Link>
           </div>
         </div>
