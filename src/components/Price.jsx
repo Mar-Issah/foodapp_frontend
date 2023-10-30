@@ -8,10 +8,11 @@ const Price = ({ price, id, options }) => {
 
   useEffect(() => {
     setTotal(quantity * price);
+    console.log(quantity);
   }, [quantity, selected, price]);
-  console.log(quantity);
+
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 z-10'>
       <h2 className='text-2xl font-bold'>${total.toFixed(2)}</h2>
       {/* QUANTITY AND ADD BUTTON CONTAINER */}
       <div className='flex justify-between items-center'>
