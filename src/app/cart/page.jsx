@@ -6,7 +6,7 @@ import Button from '@/components/Button';
 
 const CartPage = () => {
   return (
-    <div className='bg-custom-blueblack w-screen'>
+    <div className='bg-custom-blueblack w-screen overflow-x-hidden'>
       <Navbar />
       <div className='h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col text-gray-200 lg:flex-row w-screen mt-15 px-5'>
         {/* PRODUCTS CONTAINER */}
