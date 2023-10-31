@@ -41,19 +41,28 @@ const MenuPage = ({ productList }) => {
       </div>
       {/*  CONTAINER for IMAGE AND TEXT*/}
       <div className='lg:px-20 xl:px-40 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-center items-center pb-15'>
-        {menu?.map((item) => (
-          <Link href={`/product/${item.id}`} key={item.id} className='w-full h-1/3 bg-cover md:h-1/2'>
-            <div className='flex flex-col items-center w-auto mx-auto mb-8 text-gray-200 bg-transparent rounded-lg hover:shadow-lg'>
-              <div className='rounded-full border-2 border-custom-orange overflow-hidden h-50 w-50'>
-                <Image src={item.img} alt='food' width={200} height={200} className='object-contain' />
+        {menu === null || undefined ? (
+          <div className='w-screen'>
+            <button type='button' className='bg-custom-orange my-0 mx-auto' disabled>
+              <svg className='animate-spin h-5 w-5 mr-3 ...' viewBox='0 0 24 24'></svg>
+              Preparing menu...
+            </button>
+          </div>
+        ) : (
+          menu?.map((item) => (
+            <Link href={`/product/${item?._id}`} key={item?._id} className='w-full h-1/3 bg-cover md:h-1/2'>
+              <div className='flex flex-col items-center w-auto mx-auto mb-8 text-gray-200 bg-transparent rounded-lg hover:border hover:border-inherit'>
+                <div className='rounded-full border-2 border-custom-orange overflow-hidden h-50 w-50'>
+                  <Image src={item?.img} alt='food' width={200} height={200} className='object-contain' />
+                </div>
+                <div className='mt-6 flex gap-5 mb-2'>
+                  <h2 className='text-md font-semibold text-gray-200'>{item.title}</h2>
+                  <p className='text-md text-gray-300'>$20</p>
+                </div>
               </div>
-              <div className='mt-6 flex gap-5 mb-2'>
-                <h2 className='text-md font-semibold text-gray-200'>{item.title}</h2>
-                <p className='text-md text-gray-300'>$20</p>
-              </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))
+        )}
       </div>
 
       <Footer />
