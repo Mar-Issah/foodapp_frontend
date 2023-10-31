@@ -1,5 +1,4 @@
 'use client';
-import { menu } from '@/data';
 import Link from 'next/link';
 import React from 'react';
 import Navbar from '@/components/Navbar';

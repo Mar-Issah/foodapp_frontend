@@ -5,13 +5,12 @@ import { connectMongodb } from '@/lib/mongodb';
 connectMongodb();
 
 // GET SINGLE PRODUCT
-export const GET = async (req) => {
-  const { method, query } = req;
-  const id = query.id;
+export const GET = async (req, { params }) => {
+  const { method } = req;
 
   if (method === 'GET') {
     try {
-      const product = await Product.findById(id);
+      const product = await Product.findById(params.id);
       return new NextResponse(JSON.stringify(product), { status: 200 });
     } catch (err) {
       console.log(err);
@@ -21,13 +20,13 @@ export const GET = async (req) => {
 };
 
 // DELETE SINGLE PRODUCT
-export const DELETE = async (req) => {
-  const { method, query } = req;
-  const id = query.id;
+export const DELETE = async (req, { params }) => {
+  const { method } = req;
+  // const { id } = params;
 
   if (method === 'DELETE')
     try {
-      await Product.findByIdAndDelete(id);
+      await Product.findByIdAndDelete(params.id);
       return new NextResponse(JSON.stringify('Product has been deleted!'), {
         status: 200,
       });

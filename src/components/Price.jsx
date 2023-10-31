@@ -4,12 +4,10 @@ import React, { useEffect, useState } from 'react';
 const Price = ({ price, id, options }) => {
   const [total, setTotal] = useState(price);
   const [quantity, setQuantity] = useState(1);
-  const [selected, setSelected] = useState(0);
 
   useEffect(() => {
     setTotal(quantity * price);
-    console.log(quantity);
-  }, [quantity, selected, price]);
+  }, [quantity, price]);
 
   return (
     <div className='flex flex-col gap-4 z-10'>
