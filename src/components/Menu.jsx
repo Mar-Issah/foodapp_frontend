@@ -1,7 +1,67 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import Cart from './Cart';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faXmark, faPhone } from '@fortawesome/free-solid-svg-icons';
+
+const links = [
+  { id: 1, title: 'Home', url: '/' },
+  { id: 2, title: 'Menu', url: '/menu' },
+];
 
 const Menu = () => {
-  return <div>Menu</div>;
+  const [open, setOpen] = useState(false);
+
+  // TEMPORARY
+  const user = true;
+  return (
+    <div>
+      <FontAwesomeIcon
+        icon={open ? faXmark : faBars}
+        style={{ color: open ? '#d51515' : '#e0e0e0' }}
+        onClick={() => setOpen(!open)}
+        className='cursor-pointer'
+      />
+      {open && (
+        <div className='bg-custom-blueblack text-slate-100 absolute left-0 top-24 w-full h-4/5 flex flex-col gap-4 items-center justify-center text-2xl z-10'>
+          {links.map((item) => (
+            <Link href={item.url} key={item.id} onClick={() => setOpen(false)}>
+              {item.title}
+            </Link>
+          ))}
+          {/* <Link href={user ? '/orders' : 'login'} onClick={() => setOpen(false)}>
+            {user ? 'Orders' : 'Login'}
+          </Link>
+          <Link href='/cart' onClick={() => setOpen(false)}>
+            <Cart />
+          </Link> */}
+          {!user ? (
+            <Link href='/login' onClick={() => setOpen(false)}>
+              Login
+            </Link>
+          ) : (
+            <>
+              <Link href='/orders' onClick={() => setOpen(false)}>
+                Orders
+              </Link>
+              <Cart onClick={() => setOpen(false)} />
+              <Link href='/' onClick={() => setOpen(false)}>
+                Logout
+              </Link>
+            </>
+          )}
+          <div className='flex items-center gap-2 cursor-pointer bg-custom-orange px-1 rounded-md'>
+            <FontAwesomeIcon icon={faPhone} style={{ color: '#bfc7d4', height: '1rem' }} />
+            <span>
+              <a href='tel:+2335678900'>(+233) 567-8900</a>
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Menu;
