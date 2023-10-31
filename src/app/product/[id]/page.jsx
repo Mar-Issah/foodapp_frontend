@@ -5,8 +5,13 @@ import Image from 'next/image';
 import React from 'react';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import { useRouter } from 'next/navigation';
 
 const SingleProductPage = () => {
+  const router = useRouter();
+  const { id } = router?.query;
+
+  console.log(id);
   return (
     <div className='bg-custom-blueblack'>
       <Navbar />
