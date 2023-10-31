@@ -1,13 +1,20 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '@/redux/cartSlice';
 
 const Price = ({ price, id, options }) => {
   const [total, setTotal] = useState(price);
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setTotal(quantity * price);
   }, [quantity, price]);
+
+  const handleClick = () => {
+    dispatch(addProduct({ id, price, quantity }));
+  };
 
   return (
     <div className='flex flex-col gap-4 z-10'>
@@ -24,7 +31,10 @@ const Price = ({ price, id, options }) => {
           </div>
         </div>
         {/* CART BUTTON */}
-        <button className='uppercase w-56 bg-custom-orange text-gray-200  p-3 ring-1 ring-custom-orange'>
+        <button
+          className='uppercase w-56 bg-custom-orange text-gray-200  p-3 ring-1 ring-custom-orange'
+          onClick={handleClick}
+        >
           Add to Cart
         </button>
       </div>
