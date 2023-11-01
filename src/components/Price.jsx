@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '@/redux/cartSlice';
 
-const Price = ({ price, id, options }) => {
+const Price = ({ price, id }) => {
   const [total, setTotal] = useState(price);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const Price = ({ price, id, options }) => {
 
   return (
     <div className='flex flex-col gap-4 z-10'>
-      <h2 className='text-2xl font-bold'>${total.toFixed(2)}</h2>
+      <h2 className='text-2xl font-bold'>${total?.toFixed(2)}</h2>
       {/* QUANTITY AND ADD BUTTON CONTAINER */}
       <div className='flex justify-between items-center'>
         {/* QUANTITY */}

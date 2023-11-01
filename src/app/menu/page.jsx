@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Footer from '@/components/Footer';
 import { useEffect, useState } from 'react';
 
-const MenuPage = ({ productList }) => {
+const MenuPage = () => {
   const [menu, setMenu] = useState(null);
 
   const getData = async () => {
