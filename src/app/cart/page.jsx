@@ -8,14 +8,40 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeProduct } from '@/redux/cartSlice';
+import { useRouter } from 'next/navigation';
 
 const CartPage = () => {
-  const cart = useSelector((state) => state.cart);
+  const router = useRouter();
   const { products, total, quantity } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
   const handleRemoveProduct = (productId) => {
     dispatch(removeProduct({ id: productId }));
   };
+  const handleCheckout = async () => {
+    // if (!session) {
+    //   router.push('/login');
+    // } else {
+    try {
+      console.log('checkout');
+      const res = await fetch('http://localhost:3000/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          price: totalPrice,
+          products,
+          status: 'Not Paid!',
+          // userEmail: session.user.email,
+        }),
+      });
+      const data = await res.json();
+      router.push(`/pay/${data.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+    // }
+  };
+
   return (
     <div className='bg-custom-blueblack w-screen overflow-x-hidden'>
       <Navbar />
@@ -59,7 +85,7 @@ const CartPage = () => {
             <span className='font-bold ml-4'> GH₵{(total + 4).toFixed(2)}</span>
           </div>
           {/* <button className='bg-red-500 text-white p-3 rounded-md w-1/2 self-end'>CHECKOUT</button> */}
-          <Button label='CHECKOUT' />
+          <Button onClick={handleCheckout} label='CHECKOUT' />
         </div>
       </div>
       <Footer />
