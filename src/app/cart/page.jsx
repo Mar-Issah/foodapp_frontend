@@ -5,8 +5,11 @@ import Footer from '@/components/Footer';
 import Button from '@/components/Button';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch, useSelector } from 'react-redux';
 
 const CartPage = () => {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   return (
     <div className='bg-custom-blueblack w-screen overflow-x-hidden'>
       <Navbar />

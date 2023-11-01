@@ -22,7 +22,7 @@ const SingleProductPage = ({ params }) => {
       console.error('Error fetching data:', error);
     }
   };
-  console.log(product);
+
   useEffect(() => {
     getData(id);
   }, []);
