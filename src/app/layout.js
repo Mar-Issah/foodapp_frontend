@@ -20,6 +20,14 @@ export default function RootLayout({ children }) {
   return (
     <Provider store={store}>
       <html lang='en'>
+        <Head>
+          <title>H.A.M</title>
+          <meta name='description' content='Description of your page' />
+          <link
+            rel='icon'
+            href='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698682275/HAMFOODS/headicon_gd57zk.png'
+          />
+        </Head>
         <body className={inter.className}>{children}</body>
       </html>
     </Provider>
