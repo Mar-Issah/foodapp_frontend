@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '@/redux/cartSlice';
 
-const Price = ({ price, id }) => {
+const Price = ({ price, id, img, title }) => {
   const [total, setTotal] = useState(price);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const Price = ({ price, id }) => {
   }, [quantity, price]);
 
   const handleClick = () => {
-    dispatch(addProduct({ id, price, quantity }));
+    dispatch(addProduct({ id, title, img, price, quantity }));
   };
 
   return (
