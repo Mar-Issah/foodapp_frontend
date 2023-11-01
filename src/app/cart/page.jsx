@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeProduct } from '@/redux/cartSlice';
 import { useRouter } from 'next/navigation';
+import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 
 const CartPage = () => {
   const router = useRouter();
@@ -22,23 +23,9 @@ const CartPage = () => {
     // if (!session) {
     //   router.push('/login');
     // } else {
-    try {
-      console.log('checkout');
-      const res = await fetch('http://localhost:3000/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          price: totalPrice,
-          products,
-          status: 'Not Paid!',
-          // userEmail: session.user.email,
-        }),
-      });
-      const data = await res.json();
-      router.push(`/pay/${data.id}`);
-    } catch (err) {
-      console.log(err);
-    }
+
+    console.log('checkout');
+
     // }
   };
 
@@ -73,7 +60,7 @@ const CartPage = () => {
           </div>
           <div className='flex justify-between'>
             <span className=''>Service Cost</span>
-            <span className='ml-2'>GH₵4.00</span>
+            <span className='ml-4'>GH₵4.00</span>
           </div>
           <div className='flex justify-between'>
             <span className=''>Delivery Cost</span>
@@ -84,8 +71,10 @@ const CartPage = () => {
             <span className=''>TOTAL(INCL. VAT)</span>
             <span className='font-bold ml-4'> GH₵{(total + 4).toFixed(2)}</span>
           </div>
-          {/* <button className='bg-red-500 text-white p-3 rounded-md w-1/2 self-end'>CHECKOUT</button> */}
-          <Button onClick={handleCheckout} label='CHECKOUT' />
+
+          <div onClick={handleCheckout}>
+            <Button label='CHECKOUT' />
+          </div>
         </div>
       </div>
       <Footer />
