@@ -19,7 +19,7 @@ const authOptions = {
                     await connectMongodb();
                     const userExists = await User.findOne({ email });
                     if (!userExists) {
-
+                        // const userisAdmin = await
                         const res = await fetch(process.env.APP_URL + "/api/auth/user", {
                             method: 'POST',
                             headers: {
@@ -31,20 +31,29 @@ const authOptions = {
                             }
                         })
                     }
-                    if (res.status === 201) {
-                        return user
-                    }
+                    return user
                 } catch (error) {
                     console.log("Error while createing account")
                 }
 
             }
+        },
+        async jwt({ token }) {
+            const user = User.find({ email: token.email });
+            token.isAdmin = user?.isAdmin
+            return token
+        },
+        async session({token, session}){
+            if (token){
+                session.user.isAdmin = token.isAdmin
+            }
+            return session;
         }
     }
 }
 
 const handler = NextAuth(authOptions)
-
+ 
 export { handler as GET, handler as POST }
 
 export const getAuthSession = () => getServerSession(authOptions)
