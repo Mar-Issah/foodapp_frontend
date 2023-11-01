@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from '@/styles/menu.module.css';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faTwitter, faTiktok } from '@fortawesome/free-brands-svg-icons';
 import Image from 'next/image';
 
 const Footer = () => {
@@ -24,9 +22,30 @@ const Footer = () => {
           height={20}
           className='object-contain'
         />
-        <FontAwesomeIcon icon={faInstagram} size='lg' style={{ color: '#cd2323' }} />
+        <Image
+          src='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698790884/HAMFOODS/x-logo_wqjdhr.png'
+          alt='x'
+          width={20}
+          height={20}
+          className='object-contain'
+        />
+        <Image
+          src='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698790884/HAMFOODS/Instagram_logo_ppoozr.png'
+          alt='instagram'
+          width={20}
+          height={20}
+          className='object-contain'
+        />
+        <Image
+          src='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698790884/HAMFOODS/tiktok_fxehrd.webp'
+          alt='tiktok'
+          width={20}
+          height={20}
+          className='object-contain'
+        />
+        {/* <FontAwesomeIcon icon={faInstagram} size='lg' style={{ color: '#cd2323' }} />
         <FontAwesomeIcon icon={faTwitter} size='lg' style={{ color: '#005cfa' }} />
-        <FontAwesomeIcon icon={faTiktok} size='lg' style={{ color: '#000000' }} />
+        <FontAwesomeIcon icon={faTiktok} size='lg' style={{ color: '#000000' }} /> */}
       </div>
       <div className='text-xl md:font-bold flex justify-between tracking-widest px-4 mt-8 uppercase'>
         <Link href='/'>

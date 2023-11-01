@@ -1,19 +1,24 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '@/redux/cartSlice';
 
-const Price = ({ price, id, options }) => {
+const Price = ({ price, id }) => {
   const [total, setTotal] = useState(price);
   const [quantity, setQuantity] = useState(1);
-  const [selected, setSelected] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setTotal(quantity * price);
-    console.log(quantity);
-  }, [quantity, selected, price]);
+  }, [quantity, price]);
+
+  const handleClick = () => {
+    dispatch(addProduct({ id, price, quantity }));
+  };
 
   return (
     <div className='flex flex-col gap-4 z-10'>
-      <h2 className='text-2xl font-bold'>${total.toFixed(2)}</h2>
+      <h2 className='text-2xl font-bold'>${total?.toFixed(2)}</h2>
       {/* QUANTITY AND ADD BUTTON CONTAINER */}
       <div className='flex justify-between items-center'>
         {/* QUANTITY */}
@@ -26,7 +31,10 @@ const Price = ({ price, id, options }) => {
           </div>
         </div>
         {/* CART BUTTON */}
-        <button className='uppercase w-56 bg-custom-orange text-gray-200  p-3 ring-1 ring-custom-orange'>
+        <button
+          className='uppercase w-56 bg-custom-orange text-gray-200  p-3 ring-1 ring-custom-orange'
+          onClick={handleClick}
+        >
           Add to Cart
         </button>
       </div>
