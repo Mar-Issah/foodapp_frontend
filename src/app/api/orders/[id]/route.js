@@ -1,4 +1,4 @@
-import Product from '@/models/Product';
+import Order from '@/models/Orders';
 import { NextResponse } from 'next/server';
 import { connectMongodb } from '@/lib/mongodb';
 
@@ -10,8 +10,8 @@ export const GET = async (req, { params }) => {
 
   if (method === 'GET') {
     try {
-      const product = await Product.findById(params.id);
-      return new NextResponse(JSON.stringify(product), { status: 200 });
+      const orders = await Order.findById(params.id);
+      return new NextResponse(JSON.stringify(orders), { status: 200 });
     } catch (err) {
       console.log(err);
       return new NextResponse(JSON.stringify({ message: 'Something went wrong!' }), { status: 500 });
@@ -26,7 +26,7 @@ export const DELETE = async (req, { params }) => {
 
   if (method === 'DELETE')
     try {
-      await Product.findByIdAndDelete(params.id);
+      await Order.findByIdAndDelete(params.id);
       return new NextResponse(JSON.stringify('Product has been deleted!'), {
         status: 200,
       });
