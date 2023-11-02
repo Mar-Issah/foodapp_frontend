@@ -28,7 +28,7 @@ const Navbar = () => {
       </div>
       {/* RIGHT LINKS */}
       <div className='hidden md:flex gap-4 items-center justify-end flex-1'>
-        <div className='flex items-center gap-2 cursor-pointer bg-custom-orange px-1 rounded-md'>
+        <div className='flex items-center gap-2 cursor-pointer bg-custom-orange px-1 rounded-md w-44'>
           <FontAwesomeIcon icon={faPhone} style={{ color: '#bfc7d4', height: '1rem' }} />
           <span>
             <a href='tel:+2335678900'>(+233) 567-8900</a>

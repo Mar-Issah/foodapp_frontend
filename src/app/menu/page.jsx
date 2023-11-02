@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import { useQuery } from 'react-query';
 
 async function fetchData() {
-  const response = await fetch('http://localhost:3000/api/products');
+  const response = await fetch(`${process.env.APP_URL}/api/orders/api/products`);
   if (!response.ok) {
     throw new Error('Failed to fetch data');
   }

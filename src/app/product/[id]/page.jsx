@@ -7,7 +7,7 @@ import Navbar from '@/components/Navbar';
 import { useQuery } from 'react-query';
 
 async function fetchData(id) {
-  const response = await fetch(`http://localhost:3000/api/products/${id}`);
+  const response = await fetch(`${process.env.APP_URL}/api/orders/api/products/${id}`);
   if (!response.ok) {
     throw new Error('Failed to fetch data');
   }
