@@ -1,5 +1,6 @@
 'use client';
 import { Inter } from 'next/font/google';
+import NextAuthProvider from './Provider';
 import '../styles/globals.css';
 import { Provider } from 'react-redux';
 import store from '@/redux/store';

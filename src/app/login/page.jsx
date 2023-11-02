@@ -4,8 +4,17 @@ import React from 'react';
 import styles from '@/styles/fonts.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import GoogleButton from '@/components/GoogleButton';
+import { getServerSession } from 'next-auth';
+import { getSession } from 'next-auth/next';
+import { redirect } from 'next/navigation';
 
-const LoginPage = () => {
+const LoginPage = async () => {
+  const session = await getServerSession()
+  // console.log(session)
+  if (session){
+    redirect("/")
+  }
   return (
     <>
       <div className='flex flex-1 items-center justify-center h-screen w-screen'>
@@ -23,10 +32,7 @@ const LoginPage = () => {
               Welcome to h.a.m <span className={styles.fontPacifico}>foods</span>
             </h1>
             <p>Log into your account or create a new one using social buttons</p>
-            <button className='flex gap-4 p-4 ring-1 ring-orange-100 rounded-md'>
-              <Image src='/google.png' alt='' width={20} height={20} className='object-contain' />
-              <span>Sign in with Google</span>
-            </button>
+            <GoogleButton />
             <button className='flex gap-4 p-4 ring-1 ring-blue-100 rounded-md'>
               <Image
                 src='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698600035/HAMFOODS/facebook_hlkift.png'
@@ -49,7 +55,7 @@ const LoginPage = () => {
                 icon={faArrowLeft}
                 style={{ color: '#3d3f43', height: '1rem' }}
                 className='animate-bounce'
-              />
+                />
               <p>Go to Homepage</p>
             </Link>
           </div>
@@ -60,3 +66,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+

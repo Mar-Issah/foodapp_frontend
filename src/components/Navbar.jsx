@@ -1,12 +1,16 @@
+"use client"
 import React from 'react';
+import { signOut, useSession } from 'next-auth/react'
 import Menu from './Menu';
 import Link from 'next/link';
 import Cart from './Cart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import styles from '@/styles/fonts.module.css';
+import Button from './Button';
 
 const Navbar = () => {
+  const { status } = useSession();
   const user = true;
   return (
     <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
@@ -31,12 +35,15 @@ const Navbar = () => {
         </div>
         <Link href='/'>Home</Link>
         <Link href='/menu'>Menu</Link>
-        {!user ? (
-          <Link href='/login'>Login</Link>
-        ) : (
+        {status === "authenticated" ? (
           <>
             <Link href='/orders'>Orders</Link>
             <Cart />
+            <Button label={"logout"} onClick={()=>signOut()} />
+          </>
+        ) : (
+          <>
+            <Link href='/login'>Login</Link>
             <Link className='pr-2' href='/'>
               Logout
             </Link>
