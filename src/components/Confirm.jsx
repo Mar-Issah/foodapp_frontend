@@ -1,25 +1,31 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
+//show moadl after successful paymenent
 const Confirm = ({ isConfirmModal, setIsConfirmModal }) => {
+  const router = useRouter();
+  const handleClose = () => {
+    setIsConfirmModal(false);
+    // router.push(`/orders/${res.data._id}`);
+    router.push(`/orders`);
+  };
   return (
     <div>
       {isConfirmModal && (
-        <div className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50'>
-          <div className='modal-content bg-custom-blueblack p-4 rounded-lg shadow-lg'>
+        <div className='fixed inset-0 z-10 flex items-center justify-center items-center bg-black bg-opacity-50'>
+          <div className='modal-content bg-slate-200 p-4 rounded-lg shadow-lg'>
             <h2 className='text-custom-orange text-xlg font-semibold mb-4'>Thank You.</h2>
-            <p>Your Order is being prepared</p>
+
             <Image
-              src='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698905410/HAMFOODS/thanks_cgsskz.png'
-              alt='food'
+              src='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698910032/HAMFOODS/check-mark_u1e3kx.png'
+              alt='thanks'
               width={200}
               height={200}
               className='object-contain'
             />
-            <button
-              onClick={() => setIsConfirmModal(false)}
-              className='bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600'
-            >
+            <p className='text-green-600'>Your Order is being prepared</p>
+            <button onClick={handleClose} className='bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 mt-4'>
               Close
             </button>
           </div>

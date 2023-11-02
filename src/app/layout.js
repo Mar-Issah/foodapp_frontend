@@ -1,7 +1,6 @@
 'use client';
 import { Inter } from 'next/font/google';
 import '../styles/globals.css';
-import Head from 'next/head';
 import { Provider } from 'react-redux';
 import store from '@/redux/store';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -20,7 +19,7 @@ export default function RootLayout({ children }) {
         <html lang='en'>
           <head>
             <title>H.A.M</title>
-            <meta name='description' content='Description of your page' />
+            <meta name='H.A.M foods' content='Call now to make your food order' />
             <link
               rel='icon'
               href='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698682275/HAMFOODS/headicon_gd57zk.png'
