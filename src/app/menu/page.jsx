@@ -5,29 +5,18 @@ import Navbar from '@/components/Navbar';
 import styles from '@/styles/menu.module.css';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
-import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+
+async function fetchData() {
+  const response = await fetch('http://localhost:3000/api/products');
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return response.json();
+}
 
 const MenuPage = () => {
-  const [menu, setMenu] = useState(null);
-
-  const getData = async () => {
-    try {
-      const res = await fetch('http://localhost:3000/api/products');
-      if (!res.ok) {
-        throw new Error('Failed!');
-      }
-      const result = await res.json();
-      setMenu(result);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  console.log(menu);
+  const { data: menu, error, isLoading } = useQuery('menuData', fetchData);
 
   return (
     <div className='bg-custom-blueblack'>
@@ -39,16 +28,16 @@ const MenuPage = () => {
         </div>
       </div>
       {/*  CONTAINER for IMAGE AND TEXT*/}
-      <div className='lg:px-20 xl:px-40 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-center items-center pb-15'>
-        {menu === null || undefined ? (
-          <div className='w-screen'>
-            <button type='button' className='bg-custom-orange my-0 mx-auto' disabled>
-              <svg className='animate-spin h-5 w-5 mr-3 ...' viewBox='0 0 24 24'></svg>
-              Preparing menu...
-            </button>
-          </div>
-        ) : (
-          menu?.map((item) => (
+      {isLoading ? (
+        <div className='w-screen h-1/2'>
+          <button type='button' className='bg-custom-orange my-0 mx-auto' disabled>
+            <svg className='animate-spin h-5 w-5 mr-3 ...' viewBox='0 0 24 24'></svg>
+            Preparing menu...
+          </button>
+        </div>
+      ) : (
+        <div className='lg:px-12 xl:px-35 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-center items-center pb-15'>
+          {menu?.map((item) => (
             <Link href={`/product/${item?._id}`} key={item?._id} className='w-full h-1/3 bg-cover md:h-1/2'>
               <div className='flex flex-col items-center w-auto mx-auto mb-8 text-gray-200 bg-transparent rounded-lg hover:border hover:border-gray-800'>
                 <div className='rounded-full border-2 border-custom-orange overflow-hidden h-50 w-50'>
@@ -60,9 +49,9 @@ const MenuPage = () => {
                 </div>
               </div>
             </Link>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
 
       <Footer />
     </div>
