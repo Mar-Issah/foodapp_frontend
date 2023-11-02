@@ -11,7 +11,7 @@ module.exports = {
         pacifico: ['Pacifico', 'cursive'],
       },
       animation: {
-        notice: 'marquee 15s linear infinite',
+        notice: 'marquee 23s linear infinite',
       },
       keyframes: {
         marquee: {

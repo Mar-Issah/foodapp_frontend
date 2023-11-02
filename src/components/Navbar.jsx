@@ -11,10 +11,11 @@ import Button from './Button';
 
 const Navbar = () => {
   const { status } = useSession();
+  const user = true;
   return (
-    <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-20 xl:px-40'>
+    <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
       {/* LOGO */}
-      <div className='text-xl md:font-bold flex-1 tracking-widest'>
+      <div className='text-xl md:font-bold flex-1 tracking-widest pl-6'>
         <Link href='/'>
           h.a.m <span className={styles.fontPacifico}>foods</span>
         </Link>
@@ -43,6 +44,9 @@ const Navbar = () => {
         ) : (
           <>
             <Link href='/login'>Login</Link>
+            <Link className='pr-2' href='/'>
+              Logout
+            </Link>
           </>
         )}
       </div>
