@@ -23,16 +23,15 @@ export default function RootLayout({ children }) {
           href='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698682275/HAMFOODS/headicon_gd57zk.png'
         />
       </head>
-      <Provider store={store}>
-        <NextAuthProvider>
-          {/* <PersistGate loading={null} persistor={persistor}> */}
-          <QueryClientProvider client={queryClient}>
-            <body className={inter.className}>{children}</body>
-
+      <body className={inter.className}>
+        <Provider store={store}>
+          <NextAuthProvider>
+            {/* <PersistGate loading={null} persistor={persistor}> */}
+            <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
             {/* </PersistGate> */}
-          </QueryClientProvider>
-        </NextAuthProvider>
-      </Provider>
+          </NextAuthProvider>
+        </Provider>
+      </body>
     </html>
   );
 }

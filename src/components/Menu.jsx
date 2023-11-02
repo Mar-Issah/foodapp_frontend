@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Cart from './Cart';
@@ -11,18 +10,16 @@ const links = [
   { id: 2, title: 'Menu', url: '/menu' },
 ];
 
-const Menu = () => {
+const Menu = ({ status }) => {
   const [open, setOpen] = useState(false);
 
-  // TEMPORARY
-  const user = true;
   return (
     <div>
       <FontAwesomeIcon
         icon={open ? faXmark : faBars}
         style={{ color: open ? '#d51515' : '#e0e0e0' }}
         onClick={() => setOpen(!open)}
-        className='cursor-pointer'
+        className='cursor-pointer pr-4'
       />
       {open && (
         <div className='bg-custom-blueblack text-slate-100 absolute left-0 top-24 w-full h-4/5 flex flex-col gap-4 items-center justify-center text-2xl z-10'>
@@ -31,13 +28,8 @@ const Menu = () => {
               {item.title}
             </Link>
           ))}
-          {/* <Link href={user ? '/orders' : 'login'} onClick={() => setOpen(false)}>
-            {user ? 'Orders' : 'Login'}
-          </Link>
-          <Link href='/cart' onClick={() => setOpen(false)}>
-            <Cart />
-          </Link> */}
-          {!user ? (
+
+          {status !== 'authenticated' ? (
             <Link href='/login' onClick={() => setOpen(false)}>
               Login
             </Link>

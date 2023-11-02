@@ -1,17 +1,18 @@
-"use client"
+'use client';
 import React from 'react';
-import { signOut, useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react';
 import Menu from './Menu';
 import Link from 'next/link';
 import Cart from './Cart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import styles from '@/styles/fonts.module.css';
-import Button from './Button';
 
+//Navbar components with links
 const Navbar = () => {
   const { status } = useSession();
-  const user = true;
+  // const user = true;
+  console.log(status);
   return (
     <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
       {/* LOGO */}
@@ -23,7 +24,7 @@ const Navbar = () => {
 
       {/* MOBILE MENU */}
       <div className='md:hidden'>
-        <Menu />
+        <Menu status={status} />
       </div>
       {/* RIGHT LINKS */}
       <div className='hidden md:flex gap-4 items-center justify-end flex-1'>
@@ -35,18 +36,17 @@ const Navbar = () => {
         </div>
         <Link href='/'>Home</Link>
         <Link href='/menu'>Menu</Link>
-        {status === "authenticated" ? (
+        {status === 'authenticated' ? (
           <>
             <Link href='/orders'>Orders</Link>
             <Cart />
-            <Button label={"logout"} onClick={()=>signOut()} />
+            <Link className='pr-2' href='/' onClick={() => signOut()}>
+              Logout
+            </Link>
           </>
         ) : (
           <>
             <Link href='/login'>Login</Link>
-            <Link className='pr-2' href='/'>
-              Logout
-            </Link>
           </>
         )}
       </div>
