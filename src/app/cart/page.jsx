@@ -13,10 +13,14 @@ import { removeProduct, reset } from '@/redux/cartSlice';
 import { useRouter } from 'next/navigation';
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Confirm from '@/components/Confirm';
 
 const CartPage = () => {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmModal, setIsConfirmModal] = useState(false);
   const router = useRouter();
   const { products, total, quantity } = useSelector((state) => state.cart);
   const currency = 'USD';
@@ -25,13 +29,20 @@ const CartPage = () => {
 
   const createOrder = async (data) => {
     try {
-      const res = await axios.post('http://localhost:3000/api/orders', data);
+      const res = await axios.post('http://localhost:3000/api/orders', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       if (res.status === 201) {
+        setIsModalOpen(false);
         dispatch(reset());
-        router.push(`/orders/${res.data._id}`);
+        setIsConfirmModal(true);
+        // router.push(`/orders/${res.data._id}`);
       }
     } catch (err) {
       console.log(err);
+      setError('Something went wrong, Please retry');
     }
   };
 
@@ -76,7 +87,7 @@ const CartPage = () => {
           </div>
           <div className='flex justify-between'>
             <span className=''>Delivery Cost</span>
-            <span className='text-green-500'>GH₵{(0.0).toFixed(2)}</span>
+            <span className='text-green-500 ml-2'>GH₵{(0.0).toFixed(2)}</span>
           </div>
           <hr className='border-custom-orange' />
           <div className='flex justify-between text-custom-orange'>
@@ -109,13 +120,14 @@ const CartPage = () => {
           {products?.length === 0 && (
             <>
               <div onClick={() => setIsModalOpen(true)}>
-                <Button label='PAY ON DElIVERY' />
+                <Button label='PAY ON DELIVERY' />
               </div>
             </>
           )}
         </div>
         {isModalOpen && (
           <OrderForm
+            error={error}
             total={total}
             createOrder={createOrder}
             isModalOpen={isModalOpen}
@@ -123,6 +135,7 @@ const CartPage = () => {
           />
         )}
       </div>
+      <Confirm isConfirmModal={isConfirmModal} setIsConfirmModal={setIsConfirmModal} />
       <Footer />
     </div>
   );

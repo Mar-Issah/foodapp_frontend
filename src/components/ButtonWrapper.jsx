@@ -62,7 +62,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount }) => {
             createOrder({
               customer: shipping.name.full_name,
               address: shipping.address.address_line_1,
-              total: cart.total,
+              total: amount,
               method: 1,
             });
           });

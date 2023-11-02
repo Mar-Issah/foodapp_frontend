@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 
-const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder }) => {
+const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error }) => {
   const [customer, setCustomer] = useState('');
   const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleClick = () => {
-    createOrder({ customer, address, total, method: 0 });
+    console.log({ customer, address, total, phone, method: 0 });
+    createOrder({ customer, address, total, phone, method: 0 });
   };
   return (
     <div>
       {isModalOpen && (
         <div className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50'>
           <div className='modal-content bg-custom-blueblack p-4 rounded-lg shadow-lg'>
+            {!error == '' && <p className='text-red-600'>{error}</p>}
             <h2 className='text-custom-orange text-lg font-semibold mb-4'>You will pay GH₵15 after delivery</h2>
+
             <div className='sm:col-span-4'>
               <label for='username' className='block text-sm font-medium leading-6 text-slate-300'>
                 Full Name
@@ -23,14 +27,15 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder }) => {
                     type='text'
                     name='username'
                     id='username'
-                    className='block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
+                    required
+                    className='block flex-1 border-0  py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                     placeholder='John Doe'
                     onChange={(e) => setCustomer(e.target.value)}
                   />
                 </div>
               </div>
             </div>
-            <div class='sm:col-span-4'>
+            <div className='sm:col-span-4'>
               <label for='username' class='block text-sm font-medium leading-6 text-slate-300 mt-2'>
                 Phone Number
               </label>
@@ -40,9 +45,10 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder }) => {
                     type='text'
                     name='phone'
                     id='phone'
-                    className='block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
+                    className='block flex-1 border-0  py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                     placeholder='+233 234 567 89'
-                    // onChange={(e) => setCustomer(e.target.value)}
+                    required
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
               </div>
@@ -60,6 +66,7 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder }) => {
                   className='px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                   placeholder='Elton St. 505 Accra'
                   onChange={(e) => setAddress(e.target.value)}
+                  required
                 ></textarea>
               </div>
             </div>
@@ -71,12 +78,14 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder }) => {
               >
                 Close
               </button>
-              <button
-                className='rounded-md px-4 py-2 bg-slate-200 hover:bg-slate-400 text-green-500'
-                onClick={handleClick}
-              >
-                Order
-              </button>
+              {(customer && phone && address) !== (undefined || '') && (
+                <button
+                  className='rounded-md px-4 py-2 bg-slate-200 hover:bg-slate-400 text-green-500'
+                  onClick={handleClick}
+                >
+                  Order
+                </button>
+              )}
             </div>
           </div>
         </div>
