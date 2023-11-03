@@ -11,7 +11,7 @@ import styles from '@/styles/fonts.module.css';
 //Navbar components with links
 const Navbar = () => {
   const { status } = useSession();
-  console.log(status);
+
   return (
     <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
       {/* LOGO */}
