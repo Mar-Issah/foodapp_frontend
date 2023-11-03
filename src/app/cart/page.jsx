@@ -61,11 +61,14 @@ const CartPage = () => {
             <h1 className='uppercase bold text-xl'>No Orders Today</h1>
           ) : (
             products?.map((product, idx) => (
-              <div className='flex items-center justify-between mb-4' key={product.id}>
+              <div className='flex items-center justify-between mb-4' key={idx}>
                 <Image src={product.img} alt='food' width={100} height={100} />
                 <h1 className='uppercase font-bold custom-width text-base'>{product.title}</h1>
                 <h2 className='font-bold'>{product.price.toFixed(2)}</h2>
-                <span className='cursor-pointer text-red' onClick={() => handleRemoveProduct(product?.id)}>
+                <span
+                  className='cursor-pointer text-red'
+                  // onClick={() => handleRemoveProduct(idx)}
+                >
                   <FontAwesomeIcon icon={faXmark} style={{ color: '#d51515' }} />
                 </span>
               </div>

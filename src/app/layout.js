@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
           href='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698682275/HAMFOODS/headicon_gd57zk.png'
         />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning={true}>
         <Provider store={store}>
           <NextAuthProvider>
             {/* <PersistGate loading={null} persistor={persistor}> */}

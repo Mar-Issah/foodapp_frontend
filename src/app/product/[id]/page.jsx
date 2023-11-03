@@ -24,27 +24,34 @@ const SingleProductPage = ({ params }) => {
       <Navbar />
       {isLoading ? (
         <div className='flex justify-center items-center w-screen h-screen'>
-          <button type='button' className='flex justify-center items-center bg-custom-orange my-0 mx-auto' disabled>
+          <button
+            type='button'
+            className='flex justify-center items-center bg-custom-orange my-0 mx-auto p-4 animate-bounce shadow-lg rounded-sm'
+            disabled
+          >
             Preparing your order...
           </button>
         </div>
       ) : (
-        <div className='px-4 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-gray-200 md:flex-row md:gap-8 md:items-center'>
+        <div className='px-2 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-gray-200 md:flex-row md:gap-8 md:items-center'>
           {/* IMAGE CONTAINER */}
           {product?.img && (
-            <div className='relative w-full h-1/2 md:h-[80%]'>
+            <div className='relative w-full h-1/2 md:h-[80%] my-4'>
               <Image src={product?.img} alt='food' className='object-contain' fill sizes='25vw' />
             </div>
           )}
           {/* TEXT CONTAINER */}
           <div className='h-1/2 flex flex-col gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8'>
-            <h1 className='text-3xl font-bold uppercase xl:text-5xl'>{product?.title}</h1>
+            <h1 className='text-2xl font-bold uppercase xl:text-3xl'>{product?.title}</h1>
             <p>{product?.desc}</p>
             <Price price={product?.price} id={product?._id} title={product?.title} img={product?.img} />
           </div>
         </div>
       )}
-      <Footer />
+      <div className='mt-20'>
+        {' '}
+        <Footer />
+      </div>
     </div>
   );
 };
