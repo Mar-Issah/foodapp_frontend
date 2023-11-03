@@ -11,7 +11,6 @@ import styles from '@/styles/fonts.module.css';
 //Navbar components with links
 const Navbar = () => {
   const { status } = useSession();
-  // const user = true;
   console.log(status);
   return (
     <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
@@ -34,13 +33,19 @@ const Navbar = () => {
             <a href='tel:+2335678900'>(+233) 567-8900</a>
           </span>
         </div>
-        <Link href='/'>Home</Link>
-        <Link href='/menu'>Menu</Link>
-        {status === 'authenticated' ? (
+        <Link className='hover:border-b-2 border-custom-orange' href='/'>
+          Home
+        </Link>
+        <Link href='/menu' className='hover:border-b-2 border-custom-orange'>
+          Menu
+        </Link>
+        {status !== 'authenticated' ? (
           <>
-            <Link href='/orders'>Orders</Link>
+            <Link href='/orders' className='hover:border-b-2 border-custom-orange'>
+              Orders
+            </Link>
             <Cart />
-            <Link className='pr-2' href='/' onClick={() => signOut()}>
+            <Link className='pr-2 hover:border-b-2 border-custom-orange' href='/' onClick={() => signOut()}>
               Logout
             </Link>
           </>
