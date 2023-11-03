@@ -5,9 +5,10 @@ import React from 'react';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { useQuery } from 'react-query';
+import { APP_URL } from '@/lib/url';
 
 async function fetchData(id) {
-  const response = await fetch(`${process.env.APP_URL}/api/orders/api/products/${id}`);
+  const response = await fetch(`${APP_URL}/api/products/${id}`);
   if (!response.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -16,15 +17,14 @@ async function fetchData(id) {
 
 const SingleProductPage = ({ params }) => {
   const { id } = params;
-  const { data: product, error, isLoading } = useQuery(['menuData', id], () => fetchData(id));
+  const { data: product, error, isLoading } = useQuery(['product', id], () => fetchData(id));
 
   return (
     <div className='bg-custom-blueblack'>
       <Navbar />
       {isLoading ? (
-        <div className='w-screen h-screen'>
-          <button type='button' className='bg-custom-orange my-0 mx-auto' disabled>
-            <svg className='animate-spin h-5 w-5 mr-3 ...' viewBox='0 0 24 24'></svg>
+        <div className='flex justify-center items-center w-screen h-screen'>
+          <button type='button' className='flex justify-center items-center bg-custom-orange my-0 mx-auto' disabled>
             Preparing your order...
           </button>
         </div>
@@ -33,7 +33,7 @@ const SingleProductPage = ({ params }) => {
           {/* IMAGE CONTAINER */}
           {product?.img && (
             <div className='relative w-full h-1/2 md:h-[80%]'>
-              <Image src={product?.img} alt='food' className='object-contain' fill />
+              <Image src={product?.img} alt='food' className='object-contain' fill sizes='25vw' />
             </div>
           )}
           {/* TEXT CONTAINER */}

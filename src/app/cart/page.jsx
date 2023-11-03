@@ -63,7 +63,7 @@ const CartPage = () => {
             products?.map((product, idx) => (
               <div className='flex items-center justify-between mb-4' key={product.id}>
                 <Image src={product.img} alt='food' width={100} height={100} />
-                <h1 className='uppercase text-xl font-bold'>{product.title}</h1>
+                <h1 className='uppercase font-bold custom-width text-base'>{product.title}</h1>
                 <h2 className='font-bold'>{product.price.toFixed(2)}</h2>
                 <span className='cursor-pointer text-red' onClick={() => handleRemoveProduct(product?.id)}>
                   <FontAwesomeIcon icon={faXmark} style={{ color: '#d51515' }} />
@@ -81,9 +81,7 @@ const CartPage = () => {
           </div>
           <div className='flex justify-between'>
             <span className=''>Service Cost</span>
-            <span className='ml-4'>
-              GH₵{products?.length === 0 ? (0.0).toFixed(2) : total + serviceCost.toFixed(2)}
-            </span>
+            <span className='ml-4'>GH₵{products?.length === 0 ? (0.0).toFixed(2) : serviceCost.toFixed(2)}</span>
           </div>
           <div className='flex justify-between'>
             <span className=''>Delivery Cost</span>
@@ -111,15 +109,20 @@ const CartPage = () => {
               <ButtonWrapper currency={currency} showSpinner={false} amount={10} />
             </PayPalScriptProvider>
           ) : (
-            products?.length === 0 && (
+            products?.length !== 0 && (
               <div className='mb-2' onClick={() => setOpen(true)}>
                 <Button label='CHECKOUT' />
               </div>
             )
           )}
-          {products?.length === 0 && (
+          {products?.length !== 0 && (
             <>
-              <div onClick={() => setIsModalOpen(true)}>
+              <div
+                onClick={() => {
+                  setOpen(false);
+                  setIsModalOpen(true);
+                }}
+              >
                 <Button label='PAY ON DELIVERY' />
               </div>
             </>
@@ -136,7 +139,9 @@ const CartPage = () => {
         )}
       </div>
       <Confirm isConfirmModal={isConfirmModal} setIsConfirmModal={setIsConfirmModal} />
-      <Footer />
+      <div className='mt-20'>
+        <Footer />
+      </div>
     </div>
   );
 };

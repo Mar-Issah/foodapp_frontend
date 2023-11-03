@@ -13,18 +13,31 @@ const cartSlice = createSlice({
       state.quantity += 1;
       state.total += action.payload.price * action.payload.quantity;
     },
+    // removeProduct: (state, action) => {
+    //   const idToRemove = action.payload.id;
+    //   const removedProduct = state.products.find((product) => product.id === idToRemove);
 
+    //   if (removedProduct) {
+    //     // Calculate the quantity and total to be deducted
+    //     const removedQuantity = removedProduct.quantity;
+    //     const removedTotal = removedProduct.price * removedQuantity;
+
+    //     // Update state based on the removed product
+    //     state.products = state.products.filter((product) => product.id !== idToRemove);
+    //     state.quantity -= removedQuantity;
+    //     state.total -= removedTotal;
+    //   }
+    // },
     removeProduct: (state, action) => {
       const idToRemove = action.payload.id;
-      const removedProduct = state.products.find((product) => product.id === idToRemove);
+      const removedProductIndex = state.products.findIndex((product) => product.id === idToRemove);
 
-      if (removedProduct) {
-        // Calculate the quantity and total to be deducted
+      if (removedProductIndex !== -1) {
+        const removedProduct = state.products[removedProductIndex];
         const removedQuantity = removedProduct.quantity;
         const removedTotal = removedProduct.price * removedQuantity;
 
-        // Update state based on the removed product
-        state.products = state.products.filter((product) => product.id !== idToRemove);
+        state.products.splice(removedProductIndex, 1);
         state.quantity -= removedQuantity;
         state.total -= removedTotal;
       }

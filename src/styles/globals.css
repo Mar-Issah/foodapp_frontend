@@ -6,3 +6,7 @@
 html{
 	overflow-x: hidden;
 }
+
+.custom-width{
+	min-width: 9rem;
+}
