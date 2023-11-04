@@ -4,7 +4,7 @@ import axios from 'axios';
 import { APP_URL } from '@/lib/url';
 import { useRouter } from 'next/navigation';
 
-const Signup = () => {
+const Signup = ({ setRegister }) => {
   const [formData, setFormData] = useState({
     fullname: '',
     email: '',
@@ -16,15 +16,14 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const res = await axios.post(`${APP_URL}/api/auth/user`, formData, {
+      const res = await axios.post(`${APP_URL}/api/auth/signup`, formData, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
       if (res.status === 201) {
-        router.push('/');
+        setRegister(false);
       }
     } catch (err) {
       console.log(err);
@@ -38,7 +37,7 @@ const Signup = () => {
 
   return (
     <div>
-      <div as='form' className='flex flex-col items-center justify-center p-4 '>
+      <div className='flex flex-col items-center justify-center p-4 '>
         <div className='sm:col-span-4 w-full'>
           <label for='username' className='block text-sm font-medium leading-6 text-gray-500 mt-2'>
             Full Name

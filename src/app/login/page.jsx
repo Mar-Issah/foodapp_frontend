@@ -11,15 +11,38 @@ import { getSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
 import Signup from '@/components/Signup';
 import Signin from '@/components/Signin';
+import axios from 'axios';
+import { APP_URL } from '@/lib/url';
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
   const [isRegister, setRegister] = useState(false);
+  const router = useRouter();
   // const session = getServerSession();
   // console.log(session);
 
   // if (session) {
   //   redirect('/');
   // }
+  // const handleSignin = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const res = await axios.post(`${APP_URL}/api/auth/signin`, formData, {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+  //     if (res.status === 200) {
+  //       // router.push('/');
+  //       console.log(res);
+  //     }
+  //     if (res.status === 401) {
+  //       console.log(res);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   return (
     <>
       <div className='flex flex-1 items-center justify-center h-screen w-screen'>
@@ -40,7 +63,7 @@ const LoginPage = () => {
               <p>Log into your account or create a new one </p>
             </div>
             <div>
-              {isRegister ? <Signup /> : <Signin />}
+              {isRegister ? <Signup setRegister={setRegister} /> : <Signin />}
               {isRegister ? (
                 <p className='text-sm pl-4'>
                   Already have account?

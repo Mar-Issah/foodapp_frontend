@@ -1,16 +1,36 @@
 'use client';
-'use client';
 import React, { useState } from 'react';
+import { APP_URL } from '@/lib/url';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 const Signin = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const router = useRouter();
 
-  console.log(formData);
-
-  const handleClick = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${APP_URL}/api/auth/signin`, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (res.status === 200) {
+        localStorage.setItem('hamfoods', res.data.token);
+        // router.push('/');
+        console.log(res);
+      }
+      if (res.status === 401) {
+        console.log(res);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -18,7 +38,7 @@ const Signin = () => {
 
   return (
     <div>
-      <div as='form' className='flex items-center justify-center p-4 flex-col'>
+      <div className='flex items-center justify-center p-4 flex-col'>
         {/* {!error == '' && <p className='text-red-600'>{error}</p>} */}
 
         <div className='sm:col-span-4 w-full'>
@@ -59,7 +79,7 @@ const Signin = () => {
         </div>
         <div className='w-full mt-2'>
           {formData.email && formData.password && (
-            <button className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
+            <button onClick={handleSubmit} className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
               Signin
             </button>
           )}

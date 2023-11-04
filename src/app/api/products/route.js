@@ -6,8 +6,7 @@ connectMongodb();
 
 // FETCH ALL PRODUCTS
 export const GET = async (req) => {
-  const { method, cookies } = req;
-  const token = cookies.token;
+  const { method } = req;
 
   if (method === 'GET') {
     try {

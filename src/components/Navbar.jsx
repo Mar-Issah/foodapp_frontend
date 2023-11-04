@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 //Navbar components with links
 const Navbar = () => {
   const { status } = useSession();
+  const token = localStorage.getItem('hamfoods');
   //const router = useRouter();
 
   console.log(status);
@@ -43,13 +44,20 @@ const Navbar = () => {
         <Link href='/menu' className='hover:border-b-2 border-custom-orange'>
           Menu
         </Link>
-        {status === 'authenticated' ? (
+        {status === 'authenticated' || token ? (
           <>
             <Link href='/orders' className='hover:border-b-2 border-custom-orange'>
               Orders
             </Link>
             <Cart />
-            <Link className='pr-2 hover:border-b-2 border-custom-orange' href='/' onClick={() => signOut()}>
+            <Link
+              className='pr-2 hover:border-b-2 border-custom-orange'
+              href='/'
+              onClick={() => {
+                localStorage.removeItem('hamfoods');
+                signOut();
+              }}
+            >
               Logout
             </Link>
           </>
