@@ -10,6 +10,9 @@ const UserSchema = new Schema(
       type: String,
       required: [true, 'Name is required'],
     },
+    password: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
