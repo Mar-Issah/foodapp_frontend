@@ -14,7 +14,6 @@ async function fetchData() {
 }
 const OrdersPage = () => {
   const { data: orders, error, isLoading } = useQuery('orders', fetchData, { staleTime: 300000 });
-  console.log(orders);
 
   //format the mongodb date
   const formatDate = (date) => {

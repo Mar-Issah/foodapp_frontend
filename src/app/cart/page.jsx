@@ -11,12 +11,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeProduct, reset } from '@/redux/cartSlice';
 import { useRouter } from 'next/navigation';
-import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { useState } from 'react';
 import axios from 'axios';
 import Confirm from '@/components/Confirm';
 import { APP_URL } from '@/lib/url';
-import { useSession } from 'next-auth/react';
 
 const CartPage = () => {
   const [open, setOpen] = useState(false);
@@ -24,15 +23,28 @@ const CartPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const { products, total, quantity } = useSelector((state) => state.cart);
-  const { status } = useSession();
+  const [rate, setRate] = useState(null);
   const router = useRouter();
   const token = localStorage.getItem('hamfoods');
-  if (!token || status === 'unauthenticated') {
+
+  if (!token) {
     router.push('/menu');
   }
   const currency = 'USD';
   const dispatch = useDispatch();
   const serviceCost = 4.0;
+
+  const convertCurrency = async () => {
+    try {
+      const res = await axios.get(
+        ` https://api.currencyapi.com/v3/latest?apikey=cur_live_CnScmiKlvxtgf37hmmkSUDexyUMQUr0B8zlyiVor&currencies=USD&base_currency=GHS`
+      );
+      const usdValue = res.data.data.USD.value;
+      setRate(usdValue);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const createOrder = async (data) => {
     try {
@@ -70,7 +82,7 @@ const CartPage = () => {
             products?.map((product, idx) => (
               <div className='flex items-center justify-between mb-4' key={idx}>
                 <Image src={product.img} alt='food' width={100} height={100} />
-                <h1 className='uppercase font-bold custom-width text-base'>{product.title}</h1>
+                <h1 className='uppercase font-bold w-56 text-base'>{product.title}</h1>
                 <h2 className='font-bold'>{product.price.toFixed(2)}</h2>
                 <span
                   className='cursor-pointer text-red'
@@ -112,7 +124,7 @@ const CartPage = () => {
                 //'client-id': process.env.CLIENT_ID,
                 'client-id': 'AcJUL6X4MbhPSN0pVn4ujcQW3fzZ0iYyToOsCskKDduoOCkBCupk6tBkGmXetjtAap0-JjRoUzutdKfI',
                 components: 'buttons',
-                currency: 'USD',
+                currency: currency,
                 'disable-funding': 'credit,card,p24',
               }}
             >
@@ -120,7 +132,7 @@ const CartPage = () => {
                 currency={currency}
                 products={products}
                 showSpinner={false}
-                amount={10}
+                amount={(rate * total).toFixed(2)}
                 createOrder={createOrder}
               />
             </PayPalScriptProvider>

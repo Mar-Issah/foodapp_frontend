@@ -140,7 +140,7 @@ const Signup = ({ setRegister }) => {
         <div className='w-full mt-2'>
           {retryPassword === formData.password && (
             <button onClick={handleSubmit} className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
-              {isLoading ? <Spinner /> : Register}
+              {isLoading ? <Spinner /> : 'Register'}
             </button>
           )}
         </div>

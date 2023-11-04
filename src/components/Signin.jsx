@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { APP_URL } from '@/lib/url';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Spinner from './Spinner';
 
 const Signin = () => {
   const [formData, setFormData] = useState({
@@ -81,7 +82,7 @@ const Signin = () => {
         <div className='w-full mt-2'>
           {formData.email && formData.password && (
             <button onClick={handleSubmit} className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
-              {isLoading ? <Spinner /> : Signin}
+              {isLoading ? <Spinner /> : 'Signin'}
             </button>
           )}
         </div>

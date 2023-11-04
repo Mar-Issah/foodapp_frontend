@@ -43,7 +43,7 @@ const MenuPage = () => {
           <div className='flex justify-center items-center w-screen h-15'>
             <h1
               type='button'
-              className='text-custom-orange text-lg my-0 mx-auto p-4 flex justify-center items-center bold'
+              className='border-b-2 border-custom-orange  text-custom-orange text-lg my-0 mx-auto p-4 flex justify-center items-center bold'
               disabled
             >
               Our Menu
