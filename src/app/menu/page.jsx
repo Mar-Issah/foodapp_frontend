@@ -16,7 +16,7 @@ async function fetchData() {
 }
 
 const MenuPage = () => {
-  const { data: menu, error, isLoading } = useQuery('menu', fetchData);
+  const { data: menu, error, isLoading } = useQuery('menu', fetchData, { staleTime: 300000 });
 
   return (
     <div className='bg-custom-blueblack'>

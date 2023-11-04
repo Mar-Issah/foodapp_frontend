@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 // connectMongodb();
 
-// FETCH ALL PRODUCTS
+// FETCH ALL ORDERS
 export const GET = async (req) => {
   const { method } = req;
   await connectMongodb();

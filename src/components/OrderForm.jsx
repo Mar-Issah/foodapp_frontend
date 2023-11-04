@@ -6,8 +6,13 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error }) => {
   const [phone, setPhone] = useState('');
 
   const handleClick = () => {
-    console.log({ customer, address, total, phone, method: 0 });
-    createOrder({ customer, address, total, phone, method: 0 });
+    createOrder({
+      customer,
+      address,
+      total,
+      phone,
+      method: 0,
+    });
   };
   return (
     <div>
@@ -36,7 +41,7 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error }) => {
               </div>
             </div>
             <div className='sm:col-span-4'>
-              <label for='username' class='block text-sm font-medium leading-6 text-slate-300 mt-2'>
+              <label for='username' className='block text-sm font-medium leading-6 text-slate-300 mt-2'>
                 Phone Number
               </label>
               <div className='mt-1'>
@@ -58,7 +63,7 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error }) => {
               <label for='about' className='block text-sm font-medium leading-6 text-slate-300 mt-2'>
                 Address
               </label>
-              <div class='mt-2'>
+              <div className='mt-2'>
                 <textarea
                   id='address'
                   name='address'
