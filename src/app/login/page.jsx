@@ -15,7 +15,7 @@ import Signin from '@/components/Signin';
 const LoginPage = () => {
   const [isRegister, setRegister] = useState(false);
   // const session = getServerSession();
-  // console.log(session)
+  console.log(isRegister);
 
   // if (session) {
   //   redirect('/');
@@ -42,17 +42,17 @@ const LoginPage = () => {
             <div>
               {isRegister ? <Signup /> : <Signin />}
               {isRegister ? (
-                <p className='text-sm'>
+                <p className='text-sm pl-4'>
                   Already have account?
-                  <span className='underline' onClick={() => setRegister(false)}>
+                  <span className='underline cursor-pointer hover:bg-blue-200' onClick={() => setRegister(false)}>
                     {' '}
                     Signin
                   </span>
                 </p>
               ) : (
-                <p className='text-sm'>
+                <p className='text-sm pl-4'>
                   Don't have account?
-                  <span className='underline' onClick={() => setRegister(false)}>
+                  <span className='underline cursor-pointer hover:bg-blue-200' onClick={() => setRegister(true)}>
                     {' '}
                     Register
                   </span>
@@ -61,15 +61,20 @@ const LoginPage = () => {
             </div>
             <GoogleButton />
             <div>
-              <div className='flex justify-between'>
+              <div className='flex justify-between pl-4 mt-4'>
                 <p className='text-sm'>
                   Have a problem?
-                  <Link className='underline' href='/'>
+                  <Link className='underline hover:bg-blue-200' href='/'>
                     {' '}
                     Contact us
                   </Link>
                 </p>
-                <Link className='underline flex gap-1 justify-center' href='/'>
+                <Link className='underline flex gap-1 justify-center hover:bg-blue-200' href='/'>
+                  <FontAwesomeIcon
+                    icon={faArrowLeft}
+                    style={{ color: '#3d3f43', height: '1rem' }}
+                    className='animate-bounce'
+                  />
                   <p className='text-sm'>Go to Homepage</p>
                 </Link>
               </div>
