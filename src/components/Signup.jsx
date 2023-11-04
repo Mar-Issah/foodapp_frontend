@@ -11,6 +11,7 @@ const Signup = ({ setRegister }) => {
     phone: '',
     password: '',
   });
+  const [error, setError] = useState('');
   const [retryPassword, setRetry] = useState('');
   const router = useRouter();
 
@@ -27,6 +28,7 @@ const Signup = ({ setRegister }) => {
       }
     } catch (err) {
       console.log(err);
+      setError('User already exist!');
     }
   };
 
@@ -128,7 +130,11 @@ const Signup = ({ setRegister }) => {
             </div>
           </div>
         </div>
-
+        {error && (
+          <div className='w-full text-sm'>
+            <p className='text-red-500 bold'>{error}</p>
+          </div>
+        )}
         <div className='w-full mt-2'>
           {retryPassword === formData.password && (
             <button onClick={handleSubmit} className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>

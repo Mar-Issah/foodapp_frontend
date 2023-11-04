@@ -9,8 +9,10 @@ const Signin = () => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState('');
   const router = useRouter();
 
+  console.log(error);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -24,10 +26,8 @@ const Signin = () => {
         // router.push('/');
         console.log(res);
       }
-      if (res.status === 401) {
-        console.log(res);
-      }
     } catch (err) {
+      setError('Invalid email or password');
       console.log(err);
     }
   };
@@ -77,6 +77,12 @@ const Signin = () => {
             </div>
           </div>
         </div>
+
+        {error && (
+          <div className='w-full mt-2'>
+            <p className='text-red-500 bold'>{error}</p>
+          </div>
+        )}
         <div className='w-full mt-2'>
           {formData.email && formData.password && (
             <button onClick={handleSubmit} className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
