@@ -13,7 +13,7 @@ const handler = NextAuth({
   callbacks: {
     async signIn(user, account, profile) {
       if (account?.provider === 'google') {
-        const { email, name } = user;
+        const { email, fullname } = user;
         try {
           await connectMongodb();
           let existingUser = await User.findOne({ email });
@@ -21,7 +21,7 @@ const handler = NextAuth({
             // If the user doesn't exist, create a new user in the database
             existingUser = new User({
               email,
-              name,
+              fullname,
             });
             await existingUser.save();
           }

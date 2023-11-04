@@ -15,7 +15,7 @@ import Signin from '@/components/Signin';
 const LoginPage = () => {
   const [isRegister, setRegister] = useState(false);
   // const session = getServerSession();
-  console.log(isRegister);
+  // console.log(session);
 
   // if (session) {
   //   redirect('/');

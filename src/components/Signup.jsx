@@ -1,15 +1,34 @@
 'use client';
 import React, { useState } from 'react';
+import axios from 'axios';
+import { APP_URL } from '@/lib/url';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
+    fullname: '',
     email: '',
-    phoneNumber: '',
+    phone: '',
     password: '',
   });
-  console.log(formData);
-  const handleClick = () => {};
+  const [retryPassword, setRetry] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(`${APP_URL}/api/auth/user`, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (res.status === 201) {
+        router.push('/');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -26,8 +45,8 @@ const Signup = () => {
             <div className='flex ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md'>
               <input
                 type='text'
-                name='username'
-                id='username'
+                name='fullname'
+                id='fullname'
                 required
                 className='block flex-1 border-0  py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                 placeholder='John Doe'
@@ -101,18 +120,22 @@ const Signup = () => {
                 name='password2'
                 id='password2'
                 required
-                className='block flex-1 border-0  py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
+                className={`block flex-1 border-0  py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 ${
+                  retryPassword !== formData.password && 'bg-red-300'
+                }`}
                 placeholder='.............'
-                onChange={handleChange}
+                onChange={(e) => setRetry(e.target.value)}
               />
             </div>
           </div>
         </div>
 
         <div className='w-full mt-2'>
-          <button className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
-            Register
-          </button>
+          {retryPassword === formData.password && (
+            <button onClick={handleSubmit} className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
+              Register
+            </button>
+          )}
         </div>
       </div>
     </div>

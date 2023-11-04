@@ -58,9 +58,11 @@ const Signin = () => {
           </div>
         </div>
         <div className='w-full mt-2'>
-          <button className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
-            Signin
-          </button>
+          {formData.email && formData.password && (
+            <button className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
+              Signin
+            </button>
+          )}
         </div>
       </div>
     </div>
