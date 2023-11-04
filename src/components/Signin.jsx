@@ -12,7 +12,6 @@ const Signin = () => {
   const [error, setError] = useState('');
   const router = useRouter();
 
-  console.log(error);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -23,8 +22,7 @@ const Signin = () => {
       });
       if (res.status === 200) {
         localStorage.setItem('hamfoods', res.data.token);
-        // router.push('/');
-        console.log(res);
+        router.push('/');
       }
     } catch (err) {
       setError('Invalid email or password');
@@ -39,12 +37,8 @@ const Signin = () => {
   return (
     <div>
       <div className='flex items-center justify-center p-4 flex-col'>
-        {/* {!error == '' && <p className='text-red-600'>{error}</p>} */}
-
         <div className='sm:col-span-4 w-full'>
-          <label for='username' className='block text-sm font-medium leading-6 text-gray-500'>
-            Email
-          </label>
+          <label className='block text-sm font-medium leading-6 text-gray-500'>Email</label>
           <div className='mt-1'>
             <div className='flex ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md'>
               <input
@@ -60,9 +54,7 @@ const Signin = () => {
           </div>
         </div>
         <div className='sm:col-span-4 w-full'>
-          <label for='username' class='block text-sm font-medium leading-6 text-gray-500 mt-4'>
-            Password
-          </label>
+          <label className='block text-sm font-medium leading-6 text-gray-500 mt-4'>Password</label>
           <div className='mt-1'>
             <div className='flex ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md'>
               <input

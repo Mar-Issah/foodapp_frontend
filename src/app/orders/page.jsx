@@ -3,8 +3,16 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const OrdersPage = () => {
+  const { status } = useSession();
+  const router = useRouter();
+  const token = localStorage.getItem('hamfoods');
+  if (!token || status === 'unauthenticated') {
+    router.push('/');
+  }
   return (
     <div className='bg-custom-blueblack  w-screen overflow-hidden'>
       <Navbar />

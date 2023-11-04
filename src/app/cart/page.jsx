@@ -16,14 +16,20 @@ import { useState } from 'react';
 import axios from 'axios';
 import Confirm from '@/components/Confirm';
 import { APP_URL } from '@/lib/url';
+import { useSession } from 'next-auth/react';
 
 const CartPage = () => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmModal, setIsConfirmModal] = useState(false);
-  const router = useRouter();
   const { products, total, quantity } = useSelector((state) => state.cart);
+  const { status } = useSession();
+  const router = useRouter();
+  const token = localStorage.getItem('hamfoods');
+  if (!token || status === 'unauthenticated') {
+    router.push('/menu');
+  }
   const currency = 'USD';
   const dispatch = useDispatch();
   const serviceCost = 4.0;
