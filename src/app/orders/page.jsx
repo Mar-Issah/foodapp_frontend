@@ -25,30 +25,33 @@ const OrdersPage = () => {
   };
 
   return (
-    <div className='bg-custom-blueblack  w-screen overflow-hidden'>
+    <div className='bg-custom-blueblack w-screen overflow-hidden'>
       <Navbar />
-      <div className='p-4 lg:px-10 xl:px-40 w-screen'>
-        <table className='w-full h-4/5 border-separate border-spacing-3 mb-10'>
-          <thead>
-            <tr className='text-left text-custom-orange'>
-              <th className='hidden md:block'>Order ID</th>
-              <th>Date</th>
-              <th>Total</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          {!orders ? (
-            <div className='flex justify-center items-center w-screen h-15'>
-              <button
-                type='button'
-                className='bg-custom-orange my-10 mx-auto p-4 flex justify-center items-center animate-bounce shadow-lg rounded-sm'
-                disabled
-              >
-                Sorry, You have not made any Orders
-              </button>
-            </div>
-          ) : (
-            orders?.map((order) => (
+      <div className='p-4 lg:px-10 xl:px-40 min-h-screen w-screen h-60'>
+        {orders?.length === 0 && (
+          <h1 className='uppercase bold text-xl text-slate-200 mt-20'>You have not made any order</h1>
+        )}
+        {isLoading ? (
+          <div className='flex justify-center items-center w-screen h-64 pb-2'>
+            <button
+              type='button'
+              className='bg-custom-orange my-10 mx-auto p-4 flex justify-center items-center animate-bounce shadow-lg rounded-sm'
+              disabled
+            >
+              Please wait
+            </button>
+          </div>
+        ) : (
+          orders?.map((order) => (
+            <table className='w-full border-separate border-spacing-3 mb-40'>
+              <thead>
+                <tr className='text-left text-custom-orange'>
+                  <th className='hidden md:block'>Order ID</th>
+                  <th>Date</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
               <tbody className='text-gray-100'>
                 <tr className='text-sm md:text-base'>
                   <td className='hidden md:block py-3 px-1'>{order?._id}</td>
@@ -57,13 +60,11 @@ const OrdersPage = () => {
                   <td className='py-3 px-1 text-green-500'>Preparing Order...</td>
                 </tr>
               </tbody>
-            ))
-          )}
-        </table>
+            </table>
+          ))
+        )}
       </div>
-      <div className='mt-20'>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
