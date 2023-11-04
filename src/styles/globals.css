@@ -10,3 +10,7 @@ html{
 .custom-width{
 	min-width: 9rem;
 }
+
+.active{
+color: orangered;
+}

@@ -3,11 +3,9 @@ import { Inter } from 'next/font/google';
 import NextAuthProvider from '@/lib/Provider';
 import '../styles/globals.css';
 import { Provider } from 'react-redux';
-import store from '@/redux/store';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
-// import { store, persistor } from '@/redux/store';
-// import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from '@/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const queryClient = new QueryClient();
 const inter = Inter({ subsets: ['latin'] });
@@ -25,11 +23,11 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className} suppressHydrationWarning={true}>
         <Provider store={store}>
-          <NextAuthProvider>
-            {/* <PersistGate loading={null} persistor={persistor}> */}
-            <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-            {/* </PersistGate> */}
-          </NextAuthProvider>
+          <PersistGate loading={null} persistor={persistor}>
+            <NextAuthProvider>
+              <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+            </NextAuthProvider>
+          </PersistGate>
         </Provider>
       </body>
     </html>

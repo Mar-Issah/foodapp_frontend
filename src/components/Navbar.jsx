@@ -7,10 +7,14 @@ import Cart from './Cart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import styles from '@/styles/fonts.module.css';
+import { useRouter } from 'next/router';
 
 //Navbar components with links
 const Navbar = () => {
   const { status } = useSession();
+  //const router = useRouter();
+
+  console.log(status);
 
   return (
     <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
@@ -39,7 +43,7 @@ const Navbar = () => {
         <Link href='/menu' className='hover:border-b-2 border-custom-orange'>
           Menu
         </Link>
-        {status !== 'authenticated' ? (
+        {status === 'authenticated' ? (
           <>
             <Link href='/orders' className='hover:border-b-2 border-custom-orange'>
               Orders
@@ -51,7 +55,9 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link href='/login'>Login</Link>
+            <Link className='hover:border-b-2 border-custom-orange' href='/login'>
+              Login
+            </Link>
           </>
         )}
       </div>

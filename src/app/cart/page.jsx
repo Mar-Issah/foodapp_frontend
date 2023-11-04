@@ -12,9 +12,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeProduct, reset } from '@/redux/cartSlice';
 import { useRouter } from 'next/navigation';
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import Confirm from '@/components/Confirm';
+import { APP_URL } from '@/lib/url';
 
 const CartPage = () => {
   const [open, setOpen] = useState(false);
@@ -29,7 +30,7 @@ const CartPage = () => {
 
   const createOrder = async (data) => {
     try {
-      const res = await axios.post(`${process.env.APP_URL}/api/orders`, data, {
+      const res = await axios.post(`${APP_URL}/api/orders`, data, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -109,7 +110,13 @@ const CartPage = () => {
                 'disable-funding': 'credit,card,p24',
               }}
             >
-              <ButtonWrapper currency={currency} showSpinner={false} amount={10} />
+              <ButtonWrapper
+                currency={currency}
+                products={products}
+                showSpinner={false}
+                amount={10}
+                createOrder={createOrder}
+              />
             </PayPalScriptProvider>
           ) : (
             products?.length !== 0 && (
@@ -135,6 +142,7 @@ const CartPage = () => {
           <OrderForm
             error={error}
             total={total}
+            products={products}
             createOrder={createOrder}
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}

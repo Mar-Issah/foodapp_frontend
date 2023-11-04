@@ -1,10 +1,12 @@
 'use client';
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { useEffect, useState } from 'react';
-import { removeProduct, reset } from '@/redux/cartSlice';
+import { reset } from '@/redux/cartSlice';
+import axios from 'axios';
+import { APP_URL } from '@/lib/url';
 
 // Custom component to wrap the PayPalButtons and handle currency changes
-const ButtonWrapper = ({ currency, showSpinner, amount }) => {
+const ButtonWrapper = ({ currency, showSpinner, amount, createOrder }) => {
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
   const style = { layout: 'vertical' };
 
@@ -18,18 +20,6 @@ const ButtonWrapper = ({ currency, showSpinner, amount }) => {
       },
     });
   }, [currency, showSpinner]);
-
-  const createOrder = async (data) => {
-    try {
-      const res = await axios.post(`${process.env.APP_URL}/api/orders/api/orders`, data);
-      if (res.status === 201) {
-        dispatch(reset());
-        router.push(`/orders/${res.data._id}`);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <>

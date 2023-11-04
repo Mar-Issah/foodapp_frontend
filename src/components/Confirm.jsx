@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -13,7 +13,7 @@ const Confirm = ({ isConfirmModal, setIsConfirmModal }) => {
   return (
     <div>
       {isConfirmModal && (
-        <div className='fixed inset-0 z-10 flex items-center justify-center items-center bg-black bg-opacity-50'>
+        <div className='fixed inset-0 z-10 flex justify-center items-center bg-black bg-opacity-50'>
           <div className='modal-content bg-slate-200 p-4 rounded-lg shadow-lg'>
             <h2 className='text-custom-orange text-xlg font-semibold mb-4'>Thank You.</h2>
 
