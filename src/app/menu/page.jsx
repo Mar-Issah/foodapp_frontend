@@ -32,7 +32,7 @@ const MenuPage = () => {
         <div className='flex justify-center items-center w-screen h-52'>
           <button
             type='button'
-            className='bg-custom-orange my-10 mx-auto p-4 flex justify-center items-center animate-bounce shadow-lg rounded-sm'
+            className='bg-custom-orange my-10 mx-auto p-4 flex justify-center items-center animate-bounce shadow-lg rounded-lg'
             disabled
           >
             Preparing Menu...

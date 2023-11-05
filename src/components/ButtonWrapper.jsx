@@ -6,7 +6,7 @@ import axios from 'axios';
 import { APP_URL } from '@/lib/url';
 
 // Custom component to wrap the PayPalButtons and handle currency changes
-const ButtonWrapper = ({ currency, showSpinner, amount, createOrder }) => {
+const ButtonWrapper = ({ currency, showSpinner, amount, createOrder, totalGHS }) => {
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
   const style = { layout: 'vertical' };
 
@@ -51,8 +51,9 @@ const ButtonWrapper = ({ currency, showSpinner, amount, createOrder }) => {
             createOrder({
               customer: shipping.name.full_name,
               address: shipping.address.address_line_1,
-              total: amount,
+              total: totalGHS,
               method: 1,
+              userId: localStorage.getItem('hamfoodsUserId'),
             });
           });
         }}

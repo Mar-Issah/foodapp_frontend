@@ -5,15 +5,26 @@ import Footer from '@/components/Footer';
 import { useQuery } from 'react-query';
 import { APP_URL } from '@/lib/url';
 
-async function fetchData() {
+async function fetchData(userId) {
   const response = await fetch(`${APP_URL}/api/orders`);
   if (!response.ok) {
     throw new Error('Failed to fetch data');
   }
-  return response.json();
+  const allOrders = await response.json();
+  // Filter orders based on userId
+  const filteredOrders = allOrders.filter((order) => order.userId === userId);
+
+  return filteredOrders;
 }
 const OrdersPage = () => {
-  const { data: orders, error, isLoading } = useQuery('orders', fetchData, { staleTime: 300000 });
+  const userId = localStorage.getItem('hamfoodsUserId');
+  const {
+    data: orders,
+    error,
+    isLoading,
+  } = useQuery(['orders', userId], () => fetchData(userId), {
+    staleTime: 300000,
+  });
 
   //format the mongodb date
   const formatDate = (date) => {
@@ -27,7 +38,7 @@ const OrdersPage = () => {
   return (
     <div className='bg-custom-blueblack w-screen min-h-screen overflow-hidden'>
       <Navbar />
-      <div className='px-4 lg:px-10 xl:px-40 pb-80 w-screen h-60'>
+      <div className='px-4 lg:px-10 xl:px-40 pb-80 w-screen h-60 mb-40'>
         {orders?.length === 0 && (
           <h1 className='text:md uppercase bold md:text-md lg:text-xl text-slate-200 mt-20'>
             You have not made any order
@@ -37,7 +48,7 @@ const OrdersPage = () => {
           <div className='flex justify-center items-center w-screen h-64 pb-2'>
             <button
               type='button'
-              className='bg-custom-orange my-10 mx-auto p-4 flex justify-center items-center animate-bounce shadow-lg rounded-sm'
+              className='bg-custom-orange my-10 mx-auto p-4 flex justify-center items-center animate-bounce shadow-lg rounded-lg'
               disabled
             >
               Please wait
@@ -45,15 +56,16 @@ const OrdersPage = () => {
           </div>
         ) : (
           <table className='text-sm w-full border-separate border-spacing-3 mb-40 md:text-md lg:text-lg'>
-            <thead>
-              <tr className='text-left text-custom-orange'>
-                <th className='hidden md:block'>Order ID</th>
-                <th>Date</th>
-                <th>Total</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
+            {orders?.length > 0 && (
+              <thead>
+                <tr className='text-left text-custom-orange'>
+                  <th className='hidden md:block'>Order ID</th>
+                  <th>Date</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+            )}
             <tbody className='text-gray-100'>
               {orders?.map((order) => (
                 <tr key={order?._id} className='text-sm md:text-base'>

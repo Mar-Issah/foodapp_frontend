@@ -23,7 +23,7 @@ const handler = async (req, res) => {
       // User is authenticated, generate and send a JSON Web Token (JWT)
       const token = sign({ email: user.email }, process.env.JWT_SECRET);
 
-      return new NextResponse(JSON.stringify({ message: 'authenticated', token }), { status: 200 });
+      return new NextResponse(JSON.stringify({ message: 'authenticated', token, userId: user._id }), { status: 200 });
     } catch (error) {
       return new NextResponse(JSON.stringify({ error: 'Internal server error' }), { status: 500 });
     }

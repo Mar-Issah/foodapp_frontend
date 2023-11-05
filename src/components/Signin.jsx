@@ -24,7 +24,8 @@ const Signin = () => {
         },
       });
       if (res.status === 200) {
-        localStorage.setItem('hamfoods', res.data.token);
+        localStorage.setItem('hamfoodsToken', res.data.token);
+        localStorage.setItem('hamfoodsUserId', res.data.userId);
         router.push('/');
       }
     } catch (err) {

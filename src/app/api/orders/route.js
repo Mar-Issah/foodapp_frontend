@@ -27,6 +27,7 @@ export const POST = async (request) => {
     try {
       const body = await request.json();
       const order = await Order.create(body);
+
       return new NextResponse(JSON.stringify(order), { status: 201 });
     } catch (err) {
       console.log(err);
