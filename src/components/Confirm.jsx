@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import Spinner from './Spinner';
 
 //show modal after successful paymenent
 const Confirm = ({ isConfirmModal, setIsConfirmModal }) => {
-  const [isLoading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleClose = () => {
     setIsConfirmModal(false);
-    setLoading(true);
     router.push(`/orders`);
   };
   return (
@@ -29,7 +26,7 @@ const Confirm = ({ isConfirmModal, setIsConfirmModal }) => {
             />
             <p className='text-green-600'>Your Order is being prepared</p>
             <button onClick={handleClose} className='bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 mt-4'>
-              {isLoading ? <Spinner /> : 'Close'}
+              Close
             </button>
           </div>
         </div>

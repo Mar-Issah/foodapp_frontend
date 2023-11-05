@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import OrderForm from '@/components/OrderForm';
@@ -12,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeProduct, reset } from '@/redux/cartSlice';
 import { useRouter } from 'next/navigation';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Confirm from '@/components/Confirm';
 import { APP_URL } from '@/lib/url';
@@ -45,6 +44,9 @@ const CartPage = () => {
       console.log(err);
     }
   };
+  useEffect(() => {
+    convertCurrency();
+  }, []);
 
   const createOrder = async (data) => {
     try {
