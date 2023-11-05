@@ -29,15 +29,15 @@ const LoginPage = () => {
     <>
       <div className='flex flex-1 items-center justify-center h-screen w-screen'>
         <div className='w-screen h-screen flex flex-col md:flex-row '>
-          <div className='relative h-1/3 w-4/5 md:h-full'>
+          <div className='relative h-1/3 w-full md:h-full'>
             <Image
               src='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698600044/HAMFOODS/loginBG_dsh1jc.jpg'
               alt='login'
               fill
-              className='object-cover'
+              className='object-cover w-full'
             />
           </div>
-          <div className='bg-orange-100 w-full p-10 flex justify-between flex-col md:full'>
+          <div className='p-1 bg-orange-100 w-full md:p-10 lg:10 flex justify-between flex-col md:full'>
             <div>
               <h1 className='font-bold text-xl xl:text-3xl uppercase mb-2'>
                 Welcome to h.a.m <span className={styles.fontPacifico}>foods</span>
@@ -80,7 +80,7 @@ const LoginPage = () => {
                     style={{ color: '#3d3f43', height: '1rem' }}
                     className='animate-bounce'
                   />
-                  <p className='text-sm'>Go to Homepage</p>
+                  <p className='text-sm'>Go to Home</p>
                 </Link>
               </div>
             </div>

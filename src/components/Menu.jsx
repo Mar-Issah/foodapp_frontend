@@ -24,14 +24,14 @@ const Menu = ({ status }) => {
         className='cursor-pointer pr-4'
       />
       {open && (
-        <div className='bg-custom-blueblack text-slate-100 absolute left-0 top-24 w-full h-4/5 flex flex-col gap-4 items-center justify-center text-2xl z-10'>
+        <div className='bg-custom-blueblack text-slate-100 absolute left-0 top-24 w-full h-4/5 flex flex-col gap-4 items-center justify-center text-2xl z-100'>
           {links.map((item) => (
             <Link href={item.url} key={item.id} onClick={() => setOpen(false)}>
               {item.title}
             </Link>
           ))}
 
-          {status === 'authenticated' || token ? (
+          {!token ? (
             <Link href='/login' onClick={() => setOpen(false)}>
               Login
             </Link>

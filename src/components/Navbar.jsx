@@ -13,14 +13,11 @@ import { useRouter } from 'next/router';
 const Navbar = () => {
   const { status } = useSession();
   const token = localStorage.getItem('hamfoods');
-  //const router = useRouter();
-
-  console.log(status);
 
   return (
-    <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
+    <div className='h-10 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
       {/* LOGO */}
-      <div className='text-xl md:font-bold flex-1 tracking-widest pl-6'>
+      <div className='text-xl md:font-bold flex-1 tracking-widest md:pl-6 lg:pl-6 xl:pl-10'>
         <Link href='/'>
           h.a.m <span className={styles.fontPacifico}>foods</span>
         </Link>
