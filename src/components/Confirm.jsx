@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Spinner from './Spinner';
 
 //show modal after successful paymenent
 const Confirm = ({ isConfirmModal, setIsConfirmModal }) => {
