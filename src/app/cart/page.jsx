@@ -60,7 +60,6 @@ const CartPage = () => {
         setIsModalOpen(false);
         dispatch(reset());
         setIsConfirmModal(true);
-        // router.push(`/orders/${res.data._id}`);
       }
     } catch (err) {
       console.log(err);
