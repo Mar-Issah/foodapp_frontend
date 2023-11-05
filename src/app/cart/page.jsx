@@ -36,7 +36,7 @@ const CartPage = () => {
   const convertCurrency = async () => {
     try {
       const res = await axios.get(
-        ` https://api.currencyapi.com/v3/latest?apikey=cur_live_CnScmiKlvxtgf37hmmkSUDexyUMQUr0B8zlyiVor&currencies=USD&base_currency=GHS`
+        ` https://api.currencyapi.com/v3/latest?apikey=${process.env.NEXT_PUBLIC_CURRENCY_KEY}&currencies=USD&base_currency=GHS`
       );
       const usdValue = res.data.data.USD.value;
       setRate(usdValue);
@@ -124,8 +124,7 @@ const CartPage = () => {
           {open ? (
             <PayPalScriptProvider
               options={{
-                //'client-id': process.env.CLIENT_ID,
-                'client-id': 'AcJUL6X4MbhPSN0pVn4ujcQW3fzZ0iYyToOsCskKDduoOCkBCupk6tBkGmXetjtAap0-JjRoUzutdKfI',
+                'client-id': process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
                 components: 'buttons',
                 currency: currency,
                 'disable-funding': 'credit,card,p24',

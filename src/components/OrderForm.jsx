@@ -17,8 +17,8 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error }) => {
   return (
     <div>
       {isModalOpen && (
-        <div className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50'>
-          <div className='modal-content bg-custom-blueblack p-4 rounded-lg shadow-lg'>
+        <div className='fixed inset-0 z-20 flex items-center justify-center bg-black bg-opacity-50'>
+          <div className='w-screen md:w-96 modal-content bg-custom-blueblack p-4 rounded-lg shadow-lg'>
             {!error == '' && <p className='text-red-600'>{error}</p>}
             <h2 className='text-custom-orange text-lg font-semibold mb-4'>You will pay GH₵15 after delivery</h2>
 
