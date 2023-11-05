@@ -33,7 +33,7 @@ const SingleProductPage = ({ params }) => {
           </button>
         </div>
       ) : (
-        <div className='px-2 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-gray-200 md:flex-row md:gap-8 md:items-center'>
+        <div className='px-3 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-gray-200 md:flex-row md:gap-8 md:items-center'>
           {/* IMAGE CONTAINER */}
           {product?.img && (
             <div className='relative w-full h-1/2 md:h-[80%] my-4'>
@@ -41,17 +41,14 @@ const SingleProductPage = ({ params }) => {
             </div>
           )}
           {/* TEXT CONTAINER */}
-          <div className='h-1/2 flex flex-col gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8'>
-            <h1 className='text-2xl font-bold uppercase xl:text-3xl'>{product?.title}</h1>
+          <div className='h-screen flex flex-col gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8'>
+            <h1 className='text-sm md:text-lg lg:text-2xl xl:text-3xl font-bold uppercase'>{product?.title}</h1>
             <p>{product?.desc}</p>
             <Price price={product?.price} id={product?._id} title={product?.title} img={product?.img} />
           </div>
         </div>
       )}
-      <div className='mt-20'>
-        {' '}
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };

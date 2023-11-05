@@ -29,7 +29,7 @@ const MenuPage = () => {
       </div>
       {/*  CONTAINER for IMAGE AND TEXT*/}
       {isLoading ? (
-        <div className='flex justify-center items-center w-screen h-15'>
+        <div className='flex justify-center items-center w-screen h-52'>
           <button
             type='button'
             className='bg-custom-orange my-10 mx-auto p-4 flex justify-center items-center animate-bounce shadow-lg rounded-sm'
@@ -63,9 +63,7 @@ const MenuPage = () => {
                       backgroundPosition: 'center',
                     }}
                     alt='food'
-                  >
-                    {/* <Image src={item?.img} alt='food' width={200} height={200} className='object-contain' /> */}
-                  </div>
+                  ></div>
                   <div className='mt-6 flex gap-2 mb-2 sm:flex-col'>
                     <h2 className='text-md font-semibold text-gray-200'>{item.title}</h2>
                     <p className='text-md text-gray-300 flex justify-center rounded-md shadow-sm bg-black'>

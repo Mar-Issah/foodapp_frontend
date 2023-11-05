@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Cart from './Cart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { signOut } from 'next-auth/react';
 
 const links = [
   { id: 1, title: 'Home', url: '/' },
@@ -12,6 +13,7 @@ const links = [
 
 const Menu = ({ status }) => {
   const [open, setOpen] = useState(false);
+  const token = localStorage.getItem('hamfoods');
 
   return (
     <div>
@@ -22,14 +24,14 @@ const Menu = ({ status }) => {
         className='cursor-pointer pr-4'
       />
       {open && (
-        <div className='bg-custom-blueblack text-slate-100 absolute left-0 top-24 w-full h-4/5 flex flex-col gap-4 items-center justify-center text-2xl z-10'>
+        <div className='bg-custom-blueblack text-slate-100 absolute left-0 top-24 w-full h-4/5 flex flex-col gap-4 items-center justify-center text-2xl z-100'>
           {links.map((item) => (
             <Link href={item.url} key={item.id} onClick={() => setOpen(false)}>
               {item.title}
             </Link>
           ))}
 
-          {status !== 'authenticated' ? (
+          {status !== 'authenticated' || !token ? (
             <Link href='/login' onClick={() => setOpen(false)}>
               Login
             </Link>
@@ -39,7 +41,14 @@ const Menu = ({ status }) => {
                 Orders
               </Link>
               <Cart onClick={() => setOpen(false)} />
-              <Link href='/' onClick={() => setOpen(false)}>
+              <Link
+                href='/'
+                onClick={() => {
+                  setOpen(false);
+                  localStorage.removeItem('hamfoods');
+                  signOut();
+                }}
+              >
                 Logout
               </Link>
             </>

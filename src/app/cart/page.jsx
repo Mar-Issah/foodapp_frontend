@@ -45,9 +45,6 @@ const CartPage = () => {
     }
   };
 
-  console.log(process.env.NEXT_PUBLIC_CURRENCY_KEY);
-  console.log(process.env.NODE_ENV);
-  console.log(process.env.NEXT_PUBLIC_APP_URL_DEV);
   useEffect(() => {
     convertCurrency();
   }, []);
