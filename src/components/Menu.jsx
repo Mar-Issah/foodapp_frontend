@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Cart from './Cart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { signOut } from 'next-auth/react';
 
 const links = [
   { id: 1, title: 'Home', url: '/' },
@@ -12,6 +13,7 @@ const links = [
 
 const Menu = ({ status }) => {
   const [open, setOpen] = useState(false);
+  const token = localStorage.getItem('hamfoods');
 
   return (
     <div>
@@ -29,7 +31,7 @@ const Menu = ({ status }) => {
             </Link>
           ))}
 
-          {status !== 'authenticated' ? (
+          {status === 'authenticated' || token ? (
             <Link href='/login' onClick={() => setOpen(false)}>
               Login
             </Link>
@@ -39,7 +41,14 @@ const Menu = ({ status }) => {
                 Orders
               </Link>
               <Cart onClick={() => setOpen(false)} />
-              <Link href='/' onClick={() => setOpen(false)}>
+              <Link
+                href='/'
+                onClick={() => {
+                  setOpen(false);
+                  localStorage.removeItem('hamfoods');
+                  signOut();
+                }}
+              >
                 Logout
               </Link>
             </>
