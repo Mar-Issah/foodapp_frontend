@@ -25,11 +25,13 @@ const OrdersPage = () => {
   };
 
   return (
-    <div className='bg-custom-blueblack w-screen overflow-hidden'>
+    <div className='bg-custom-blueblack w-screen min-h-screen overflow-hidden'>
       <Navbar />
-      <div className='p-4 lg:px-10 xl:px-40 min-h-screen w-screen h-60'>
+      <div className='px-4 lg:px-10 xl:px-40 pb-80 w-screen h-60'>
         {orders?.length === 0 && (
-          <h1 className='uppercase bold text-xl text-slate-200 mt-20'>You have not made any order</h1>
+          <h1 className='text:md uppercase bold md:text-md lg:text-xl text-slate-200 mt-20'>
+            You have not made any order
+          </h1>
         )}
         {isLoading ? (
           <div className='flex justify-center items-center w-screen h-64 pb-2'>
@@ -42,7 +44,7 @@ const OrdersPage = () => {
             </button>
           </div>
         ) : (
-          <table className='w-full border-separate border-spacing-3 mb-40'>
+          <table className='text-sm w-full border-separate border-spacing-3 mb-40 md:text-md lg:text-lg'>
             <thead>
               <tr className='text-left text-custom-orange'>
                 <th className='hidden md:block'>Order ID</th>

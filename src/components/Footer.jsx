@@ -6,7 +6,7 @@ import Image from 'next/image';
 const Footer = () => {
   return (
     //jsx that return the footer section
-    <div className='border-t-2 border-text-gray-200 bg-custom-blueblack text-gray-200 h-70 pb-2'>
+    <div className='border-t-2 border-text-gray-200 bg-custom-blueblack text-gray-200 h-70 pb-2 absolute'>
       <div className='w-4/5 md:w-3/5 lg:w-3/5 xl:w-3/5 items-center flex flex-col justify-center mt-10 mx-auto mb-2'>
         <h1 className={`${styles.fontDancing} text-gray-200 sm:text-1xl md:text-3xl mb-2`}>GET 30% OF ALL DISHES</h1>
         <p>
@@ -48,7 +48,11 @@ const Footer = () => {
         <Link href='/'>
           h.a.m <span className={styles.fontPacifico}>foods</span>
         </Link>
-        <p>© {new Date().getFullYear()} ALL RIGHTS RESERVED.</p>
+        <p className='flex'>
+          © {new Date().getFullYear()}
+          {'  '}
+          <span className='hidden md:block lg:block xl:block'> - ALL RIGHTS RESERVED.</span>
+        </p>
       </div>
     </div>
   );

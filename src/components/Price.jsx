@@ -21,7 +21,7 @@ const Price = ({ price, id, img, title }) => {
 
   return (
     <div className='flex flex-col gap-4 z-10'>
-      <h2 className='text-2xl font-bold'>${total?.toFixed(2)}</h2>
+      <h2 className='text-sm md:text-lg lg:text-2xl xl:text-3xl font-bold'>${total?.toFixed(2)}</h2>
       {/* QUANTITY AND ADD BUTTON CONTAINER */}
       {(token || status === 'authenticated') && (
         <div className='flex justify-between items-center'>
@@ -35,7 +35,7 @@ const Price = ({ price, id, img, title }) => {
             </div>
           </div>
           <button
-            className='uppercase w-56 bg-custom-orange text-gray-200  p-3 ring-1 ring-custom-orange'
+            className='text-sm md:text-lg lg:text-lg xl:text-lg uppercase w-56 bg-custom-orange text-gray-200 p-2.5 ring-1 ring-custom-orange'
             onClick={handleClick}
           >
             Add to Cart

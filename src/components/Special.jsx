@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const Special = () => {
   return (
-    <div className='w-screen md:w-4/5 lg:w-4/5 flex rounded-2xl my-14 h-15'>
+    <div className='w-screen md:w-4/5 lg:w-4/5 flex rounded-2xl pb-16 mt-10 h-15'>
       <div>
         <Image
           src='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698719236/HAMFOODS/tuzaafi_fw2rn2.png'
