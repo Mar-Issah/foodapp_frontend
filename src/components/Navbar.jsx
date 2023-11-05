@@ -13,9 +13,6 @@ import { useRouter } from 'next/router';
 const Navbar = () => {
   const { status } = useSession();
   const token = localStorage.getItem('hamfoods');
-  //const router = useRouter();
-
-  console.log(status);
 
   return (
     <div className='h-12 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
