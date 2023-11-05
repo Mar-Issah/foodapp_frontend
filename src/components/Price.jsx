@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addProduct } from '@/redux/cartSlice';
 import { useSession } from 'next-auth/react';
 
-const Price = ({ price, id, img, title }) => {
+const Price = ({ price, id, img, title, showToast }) => {
   const [total, setTotal] = useState(price);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const Price = ({ price, id, img, title }) => {
   }, [quantity, price]);
 
   const handleClick = () => {
+    showToast();
     dispatch(addProduct({ id, title, img, price, quantity }));
   };
 

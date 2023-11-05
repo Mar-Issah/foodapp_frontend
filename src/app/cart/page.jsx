@@ -146,7 +146,7 @@ const CartPage = () => {
               </div>
             )
           )}
-          {!products?.length !== 0 && (
+          {products?.length !== 0 && (
             <>
               <div
                 onClick={() => {

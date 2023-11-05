@@ -48,7 +48,7 @@ const OrdersPage = () => {
           <div className='flex justify-center items-center w-screen h-64 pb-2'>
             <button
               type='button'
-              className='bg-custom-orange my-10 mx-auto p-4 flex justify-center items-center animate-bounce shadow-lg rounded-sm'
+              className='bg-custom-orange my-10 mx-auto p-4 flex justify-center items-center animate-bounce shadow-lg rounded-lg'
               disabled
             >
               Please wait
@@ -56,15 +56,16 @@ const OrdersPage = () => {
           </div>
         ) : (
           <table className='text-sm w-full border-separate border-spacing-3 mb-40 md:text-md lg:text-lg'>
-            <thead>
-              <tr className='text-left text-custom-orange'>
-                <th className='hidden md:block'>Order ID</th>
-                <th>Date</th>
-                <th>Total</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
+            {orders?.length > 0 && (
+              <thead>
+                <tr className='text-left text-custom-orange'>
+                  <th className='hidden md:block'>Order ID</th>
+                  <th>Date</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+            )}
             <tbody className='text-gray-100'>
               {orders?.map((order) => (
                 <tr key={order?._id} className='text-sm md:text-base'>
