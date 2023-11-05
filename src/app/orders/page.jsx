@@ -42,26 +42,27 @@ const OrdersPage = () => {
             </button>
           </div>
         ) : (
-          orders?.map((order) => (
-            <table className='w-full border-separate border-spacing-3 mb-40'>
-              <thead>
-                <tr className='text-left text-custom-orange'>
-                  <th className='hidden md:block'>Order ID</th>
-                  <th>Date</th>
-                  <th>Total</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody className='text-gray-100'>
-                <tr className='text-sm md:text-base'>
+          <table className='w-full border-separate border-spacing-3 mb-40'>
+            <thead>
+              <tr className='text-left text-custom-orange'>
+                <th className='hidden md:block'>Order ID</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody className='text-gray-100'>
+              {orders?.map((order) => (
+                <tr key={order?._id} className='text-sm md:text-base'>
                   <td className='hidden md:block py-3 px-1'>{order?._id}</td>
                   <td className='py-3 px-1'>{formatDate(order?.createdAt)}</td>
                   <td className='py-3 px-1'>GH₵{order?.total.toFixed(2)}</td>
                   <td className='py-3 px-1 text-green-500'>Preparing Order...</td>
                 </tr>
-              </tbody>
-            </table>
-          ))
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
       <Footer />
