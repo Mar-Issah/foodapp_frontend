@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '@/redux/cartSlice';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const Price = ({ price, id, img, title, showToast }) => {
   const [total, setTotal] = useState(price);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const { status } = useSession();
+  const router = useRouter();
 
   const token = localStorage.getItem('hamfoodsToken');
   useEffect(() => {
@@ -18,6 +20,7 @@ const Price = ({ price, id, img, title, showToast }) => {
   const handleClick = () => {
     showToast();
     dispatch(addProduct({ id, title, img, price, quantity }));
+    router.push('./menu');
   };
 
   return (
