@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { APP_URL } from '@/lib/url';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Spinner from './Spinner';
 
 const Signin = () => {
   const [formData, setFormData] = useState({
@@ -10,10 +11,12 @@ const Signin = () => {
     password: '',
   });
   const [error, setError] = useState('');
+  const [isLoading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await axios.post(`${APP_URL}/api/auth/signin`, formData, {
         headers: {
@@ -25,6 +28,7 @@ const Signin = () => {
         router.push('/');
       }
     } catch (err) {
+      setLoading(false);
       setError('Invalid email or password');
       console.log(err);
     }
@@ -78,7 +82,7 @@ const Signin = () => {
         <div className='w-full mt-2'>
           {formData.email && formData.password && (
             <button onClick={handleSubmit} className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
-              Signin
+              {isLoading ? <Spinner /> : 'Signin'}
             </button>
           )}
         </div>

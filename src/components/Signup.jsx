@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { APP_URL } from '@/lib/url';
-import { useRouter } from 'next/navigation';
+import Spinner from './Spinner';
 
 const Signup = ({ setRegister }) => {
   const [formData, setFormData] = useState({
@@ -13,10 +13,11 @@ const Signup = ({ setRegister }) => {
   });
   const [error, setError] = useState('');
   const [retryPassword, setRetry] = useState('');
-  const router = useRouter();
+  const [isLoading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await axios.post(`${APP_URL}/api/auth/signup`, formData, {
         headers: {
@@ -28,6 +29,7 @@ const Signup = ({ setRegister }) => {
       }
     } catch (err) {
       console.log(err);
+      setLoading(false);
       setError('User already exist!');
     }
   };
@@ -138,7 +140,7 @@ const Signup = ({ setRegister }) => {
         <div className='w-full mt-2'>
           {retryPassword === formData.password && (
             <button onClick={handleSubmit} className='bg-blue-900 text-slate-200 rounded p-2' type='submit'>
-              Register
+              {isLoading ? <Spinner /> : 'Register'}
             </button>
           )}
         </div>

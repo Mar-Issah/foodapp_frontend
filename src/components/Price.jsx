@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '@/redux/cartSlice';
+import { useSession } from 'next-auth/react';
 
 const Price = ({ price, id, img, title }) => {
   const [total, setTotal] = useState(price);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const { status } = useSession();
 
+  const token = localStorage.getItem('hamfoods');
   useEffect(() => {
     setTotal(quantity * price);
   }, [quantity, price]);
@@ -20,24 +23,25 @@ const Price = ({ price, id, img, title }) => {
     <div className='flex flex-col gap-4 z-10'>
       <h2 className='text-2xl font-bold'>${total?.toFixed(2)}</h2>
       {/* QUANTITY AND ADD BUTTON CONTAINER */}
-      <div className='flex justify-between items-center'>
-        {/* QUANTITY */}
-        <div className='flex justify-between w-full p-3 ring-1 ring-custom-orange'>
-          <span>Quantity</span>
-          <div className='flex gap-4 items-center'>
-            <button onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}>{'<'}</button>
-            <span>{quantity}</span>
-            <button onClick={() => setQuantity((prev) => (prev < 9 ? prev + 1 : 9))}>{'>'}</button>
+      {(token || status === 'authenticated') && (
+        <div className='flex justify-between items-center'>
+          {/* QUANTITY */}
+          <div className='flex justify-between w-full p-3 ring-1 ring-custom-orange'>
+            <span>Quantity</span>
+            <div className='flex gap-4 items-center'>
+              <button onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}>{'<'}</button>
+              <span>{quantity}</span>
+              <button onClick={() => setQuantity((prev) => (prev < 9 ? prev + 1 : 9))}>{'>'}</button>
+            </div>
           </div>
+          <button
+            className='uppercase w-56 bg-custom-orange text-gray-200  p-3 ring-1 ring-custom-orange'
+            onClick={handleClick}
+          >
+            Add to Cart
+          </button>
         </div>
-        {/* CART BUTTON */}
-        <button
-          className='uppercase w-56 bg-custom-orange text-gray-200  p-3 ring-1 ring-custom-orange'
-          onClick={handleClick}
-        >
-          Add to Cart
-        </button>
-      </div>
+      )}
     </div>
   );
 };

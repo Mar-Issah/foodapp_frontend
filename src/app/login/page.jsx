@@ -24,25 +24,7 @@ const LoginPage = () => {
   // if (session) {
   //   redirect('/');
   // }
-  // const handleSignin = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const res = await axios.post(`${APP_URL}/api/auth/signin`, formData, {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     if (res.status === 200) {
-  //       // router.push('/');
-  //       console.log(res);
-  //     }
-  //     if (res.status === 401) {
-  //       console.log(res);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+
   return (
     <>
       <div className='flex flex-1 items-center justify-center h-screen w-screen'>
@@ -74,7 +56,7 @@ const LoginPage = () => {
                 </p>
               ) : (
                 <p className='text-sm pl-4'>
-                  Don't have account?
+                  Don&apos;t have account?
                   <span className='underline cursor-pointer hover:bg-blue-200' onClick={() => setRegister(true)}>
                     {' '}
                     Register

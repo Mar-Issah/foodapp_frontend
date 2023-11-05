@@ -10,7 +10,6 @@ const ButtonWrapper = ({ currency, showSpinner, amount, createOrder }) => {
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
   const style = { layout: 'vertical' };
 
-  console.log(amount);
   useEffect(() => {
     dispatch({
       type: 'resetOptions',
@@ -42,7 +41,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount, createOrder }) => {
               ],
             })
             .then((orderId) => {
-              // Your code here after create the order
+              // code here after create the order
               return orderId;
             });
         }}

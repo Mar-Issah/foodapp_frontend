@@ -2,64 +2,67 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Button from '@/components/Button';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useQuery } from 'react-query';
+import { APP_URL } from '@/lib/url';
 
-const OrdersPage = () => {
-  const { status } = useSession();
-  const router = useRouter();
-  const token = localStorage.getItem('hamfoods');
-  if (!token || status === 'unauthenticated') {
-    router.push('/');
+async function fetchData() {
+  const response = await fetch(`${APP_URL}/api/orders`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
   }
+  return response.json();
+}
+const OrdersPage = () => {
+  const { data: orders, error, isLoading } = useQuery('orders', fetchData, { staleTime: 300000 });
+
+  //format the mongodb date
+  const formatDate = (date) => {
+    const inputDate = new Date(date);
+    const year = inputDate.getFullYear();
+    const month = String(inputDate.getMonth() + 1).padStart(2, '0');
+    const day = String(inputDate.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   return (
-    <div className='bg-custom-blueblack  w-screen overflow-hidden'>
+    <div className='bg-custom-blueblack w-screen overflow-hidden'>
       <Navbar />
-      <div className='p-4 lg:px-10 xl:px-40 w-screen'>
-        {/* {
-          <div className='flex justify-center items-center w-screen h-15'>
+      <div className='p-4 lg:px-10 xl:px-40 min-h-screen w-screen h-60'>
+        {orders?.length === 0 && (
+          <h1 className='uppercase bold text-xl text-slate-200 mt-20'>You have not made any order</h1>
+        )}
+        {isLoading ? (
+          <div className='flex justify-center items-center w-screen h-64 pb-2'>
             <button
               type='button'
               className='bg-custom-orange my-10 mx-auto p-4 flex justify-center items-center animate-bounce shadow-lg rounded-sm'
               disabled
             >
-              Sorry, You have not made any Orders
+              Please wait
             </button>
           </div>
-        } */}
-        <table className='w-full h-4/5 border-separate border-spacing-3 mb-10'>
-          <thead>
-            <tr className='text-left text-custom-orange'>
-              <th className='hidden md:block'>Order ID</th>
-              <th>Date</th>
-              <th>Total</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody className='text-gray-100'>
-            <tr className='text-sm md:text-base'>
-              <td className='hidden md:block py-3 px-1'>1237861238721</td>
-              <td className='py-3 px-1'>19.07.2023</td>
-              <td className='py-3 px-1'>GH₵89.90</td>
-              <td className='py-3 px-1 text-green-500'>On the way (approx. 10min)...</td>
-            </tr>
-            <tr className='text-sm md:text-base'>
-              <td className='hidden md:block py-3 px-1'>1237861238721</td>
-              <td className='py-3 px-1'>19.07.2023</td>
-              <td className='py-3 px-1'>89.90</td>
-
-              <td className='py-3 px-1'>On the way (approx. 10min)...</td>
-            </tr>
-            <tr className='text-sm md:text-base text-gray-100'>
-              <td className='hidden md:block py-3 px-1'>1237861238721</td>
-              <td className='py-3 px-1'>19.07.2023</td>
-              <td className='py-3 px-1'>89.90</td>
-
-              <td className='py-3 px-1'>On the way (approx. 10min)...</td>
-            </tr>
-          </tbody>
-        </table>
+        ) : (
+          orders?.map((order) => (
+            <table className='w-full border-separate border-spacing-3 mb-40'>
+              <thead>
+                <tr className='text-left text-custom-orange'>
+                  <th className='hidden md:block'>Order ID</th>
+                  <th>Date</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody className='text-gray-100'>
+                <tr className='text-sm md:text-base'>
+                  <td className='hidden md:block py-3 px-1'>{order?._id}</td>
+                  <td className='py-3 px-1'>{formatDate(order?.createdAt)}</td>
+                  <td className='py-3 px-1'>GH₵{order?.total.toFixed(2)}</td>
+                  <td className='py-3 px-1 text-green-500'>Preparing Order...</td>
+                </tr>
+              </tbody>
+            </table>
+          ))
+        )}
       </div>
       <Footer />
     </div>
