@@ -20,7 +20,7 @@ const Price = ({ price, id, img, title, showToast }) => {
   const handleClick = () => {
     showToast();
     dispatch(addProduct({ id, title, img, price, quantity }));
-    router.push('./menu');
+    router.push('/menu');
   };
 
   return (
