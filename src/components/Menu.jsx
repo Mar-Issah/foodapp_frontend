@@ -13,7 +13,7 @@ const links = [
 
 const Menu = ({ status }) => {
   const [open, setOpen] = useState(false);
-  const token = localStorage.getItem('hamfoods');
+  const token = localStorage.getItem('hamfoodsToken');
 
   return (
     <div>
@@ -45,7 +45,8 @@ const Menu = ({ status }) => {
                 href='/'
                 onClick={() => {
                   setOpen(false);
-                  localStorage.removeItem('hamfoods');
+                  localStorage.removeItem('hamfoodsToken');
+                  localStorage.removeItem('hamfoodsUserId');
                   signOut();
                 }}
               >

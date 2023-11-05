@@ -10,7 +10,7 @@ const Price = ({ price, id, img, title }) => {
   const dispatch = useDispatch();
   const { status } = useSession();
 
-  const token = localStorage.getItem('hamfoods');
+  const token = localStorage.getItem('hamfoodsToken');
   useEffect(() => {
     setTotal(quantity * price);
   }, [quantity, price]);

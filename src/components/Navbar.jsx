@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 //Navbar components with links
 const Navbar = () => {
   const { status } = useSession();
-  const token = localStorage.getItem('hamfoods');
+  const token = localStorage.getItem('hamfoodsToken');
 
   return (
     <div className='h-10 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
@@ -51,7 +51,8 @@ const Navbar = () => {
               className='pr-2 hover:border-b-2 border-custom-orange'
               href='/'
               onClick={() => {
-                localStorage.removeItem('hamfoods');
+                localStorage.removeItem('hamfoodsToken');
+                localStorage.removeItem('hamfoodsUserId');
                 signOut();
               }}
             >

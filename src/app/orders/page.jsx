@@ -5,15 +5,26 @@ import Footer from '@/components/Footer';
 import { useQuery } from 'react-query';
 import { APP_URL } from '@/lib/url';
 
-async function fetchData() {
+async function fetchData(userId) {
   const response = await fetch(`${APP_URL}/api/orders`);
   if (!response.ok) {
     throw new Error('Failed to fetch data');
   }
-  return response.json();
+  const allOrders = await response.json();
+  // Filter orders based on userId
+  const filteredOrders = allOrders.filter((order) => order.userId === userId);
+
+  return filteredOrders;
 }
 const OrdersPage = () => {
-  const { data: orders, error, isLoading } = useQuery('orders', fetchData, { staleTime: 300000 });
+  const userId = localStorage.getItem('hamfoodsUserId');
+  const {
+    data: orders,
+    error,
+    isLoading,
+  } = useQuery(['orders', userId], () => fetchData(userId), {
+    staleTime: 300000,
+  });
 
   //format the mongodb date
   const formatDate = (date) => {
@@ -27,7 +38,7 @@ const OrdersPage = () => {
   return (
     <div className='bg-custom-blueblack w-screen min-h-screen overflow-hidden'>
       <Navbar />
-      <div className='px-4 lg:px-10 xl:px-40 pb-80 w-screen h-60'>
+      <div className='px-4 lg:px-10 xl:px-40 pb-80 w-screen h-60 mb-40'>
         {orders?.length === 0 && (
           <h1 className='text:md uppercase bold md:text-md lg:text-xl text-slate-200 mt-20'>
             You have not made any order

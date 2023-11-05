@@ -12,6 +12,7 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error }) => {
       total,
       phone,
       method: 0,
+      userId: localStorage.getItem('hamfoodsUserId'),
     });
   };
   return (

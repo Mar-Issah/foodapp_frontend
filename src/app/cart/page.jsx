@@ -24,7 +24,7 @@ const CartPage = () => {
   const { products, total, quantity } = useSelector((state) => state.cart);
   const [rate, setRate] = useState(null);
   const router = useRouter();
-  const token = localStorage.getItem('hamfoods');
+  const token = localStorage.getItem('hamfoodsToken');
 
   if (!token) {
     router.push('/menu');
@@ -75,9 +75,9 @@ const CartPage = () => {
   return (
     <div className='bg-custom-blueblack w-screen overflow-x-hidden'>
       <Navbar />
-      <div className='h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col text-gray-200 lg:flex-row w-screen mt-15 px-5'>
+      <div className='h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col text-gray-200 lg:flex-row w-screen mt-15 px-2 md:px-5'>
         {/* PRODUCTS CONTAINER */}
-        <div className='h-1/2 p-4 flex flex-col justify-center overflow-x-hidden overflow-y-auto lg:h-full lg:w-2/3 2xl:w-1/2 lg:px-15 xl:px-40 mt-10'>
+        <div className='h-1/2 p-0 md:p-4 flex flex-col justify-center overflow-x-hidden overflow-y-auto lg:h-full lg:w-2/3 2xl:w-1/2 lg:px-15 xl:px-40 mt-10'>
           {/* SINGLE ITEM */}
           {products?.length === 0 ? (
             <h1 className='uppercase bold text-xl'>No Orders Today</h1>
@@ -85,10 +85,10 @@ const CartPage = () => {
             products?.map((product, idx) => (
               <div className='flex items-center justify-between mb-4' key={idx}>
                 <Image src={product.img} alt='food' width={100} height={100} />
-                <h1 className='uppercase font-bold w-56 text-base'>{product.title}</h1>
-                <h2 className='font-bold'>{product.price.toFixed(2)}</h2>
+                <h1 className='text-sm md:base uppercase font-bold w-56'>{product.title}</h1>
+                <h2 className='text-sm md:text-base font-bold'>{product.price.toFixed(2)}</h2>
                 <span
-                  className='cursor-pointer text-red'
+                  className='cursor-pointer text-red ml-2'
                   // onClick={() => handleRemoveProduct(idx)}
                 >
                   <FontAwesomeIcon icon={faXmark} style={{ color: '#d51515' }} />
@@ -135,6 +135,7 @@ const CartPage = () => {
                 products={products}
                 showSpinner={false}
                 amount={(rate * total).toFixed(2)}
+                totalGHS={total + serviceCost}
                 createOrder={createOrder}
               />
             </PayPalScriptProvider>
@@ -145,7 +146,7 @@ const CartPage = () => {
               </div>
             )
           )}
-          {products?.length !== 0 && (
+          {!products?.length !== 0 && (
             <>
               <div
                 onClick={() => {
@@ -161,7 +162,7 @@ const CartPage = () => {
         {isModalOpen && (
           <OrderForm
             error={error}
-            total={total}
+            total={total + serviceCost}
             products={products}
             createOrder={createOrder}
             isModalOpen={isModalOpen}
