@@ -60,9 +60,7 @@ const Navbar = () => {
             </Link>
             <Cart currentRoute={currentRoute} />
             <Link
-              className={`${
-                currentRoute === '/login' && 'border-b-2 border-custom-orange'
-              } hover:text-custom-orange pr-8`}
+              className={`hover:text-custom-orange pr-8`}
               href='/login'
               onClick={() => {
                 localStorage.removeItem('hamfoodsToken');
