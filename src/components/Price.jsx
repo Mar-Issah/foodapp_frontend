@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '@/redux/cartSlice';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -11,6 +11,9 @@ const Price = ({ price, id, img, title, showToast }) => {
   const dispatch = useDispatch();
   const { status } = useSession();
   const router = useRouter();
+
+  const { products } = useSelector((state) => state.cart);
+  console.log(products);
 
   const token = localStorage.getItem('hamfoodsToken');
   useEffect(() => {

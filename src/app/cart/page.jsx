@@ -75,6 +75,8 @@ const CartPage = () => {
     dispatch(removeProduct({ id: productId }));
   };
 
+  console.log(products);
+
   return (
     <div className='bg-custom-blueblack w-screen overflow-x-hidden'>
       <Navbar />
@@ -88,9 +90,11 @@ const CartPage = () => {
             products?.map((product, idx) => (
               <div className='flex items-center justify-between mb-4' key={idx}>
                 <Image src={product.img} alt='food' width={100} height={100} />
-                <h1 className='text-sm md:base uppercase font-bold w-56'>{product.title}</h1>
-                <h2 className='text-sm md:text-base font-bold'>{product.price.toFixed(2)}</h2>
-                <span className='cursor-pointer text-red ml-2' onClick={() => handleRemoveProduct(product?.id)}>
+                <h1 className='text-sm md:base uppercase font-bold w-56'>
+                  {product.title} ({product?.quantity})
+                </h1>
+                <h2 className='text-sm md:text-base font-bold'>{(product?.quantity * product.price).toFixed(2)}</h2>
+                <span className='cursor-pointer text-red ml-2 hover:bg-black' onClick={() => handleRemoveProduct(idx)}>
                   <FontAwesomeIcon icon={faXmark} style={{ color: '#d51515' }} />
                 </span>
               </div>
