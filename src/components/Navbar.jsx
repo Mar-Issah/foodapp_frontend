@@ -48,7 +48,7 @@ const Navbar = () => {
             </Link>
             <Cart />
             <Link
-              className='pr-2 hover:border-b-2 border-custom-orange'
+              className='pr-4 hover:border-b-2 border-custom-orange'
               href='/'
               onClick={() => {
                 localStorage.removeItem('hamfoodsToken');

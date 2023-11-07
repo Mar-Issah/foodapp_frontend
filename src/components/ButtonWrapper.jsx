@@ -54,7 +54,6 @@ const ButtonWrapper = ({ currency, isLoading, amount, createOrder, totalGHS, set
               userId: localStorage.getItem('hamfoodsUserId'),
             });
             setIsLoading(false);
-            setOpen(false);
           });
         }}
       />

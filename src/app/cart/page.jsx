@@ -123,7 +123,7 @@ const CartPage = () => {
             </span>
           </div>
 
-          {open ? (
+          {products?.length !== 0 && open ? (
             <PayPalScriptProvider
               options={{
                 'client-id': process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
@@ -140,7 +140,6 @@ const CartPage = () => {
                 createOrder={createOrder}
                 setIsLoading={setIsLoading}
                 isLoading={isLoading}
-                setOpen={setOpen}
               />
             </PayPalScriptProvider>
           ) : (
