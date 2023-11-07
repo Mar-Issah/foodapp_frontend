@@ -1,13 +1,10 @@
 'use client';
-import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
-import { useEffect, useState } from 'react';
-import { reset } from '@/redux/cartSlice';
-import axios from 'axios';
-import { APP_URL } from '@/lib/url';
+import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+import { useEffect } from 'react';
 import Spinner from './Spinner';
 
 // Custom component to wrap the PayPalButtons and handle currency changes
-const ButtonWrapper = ({ currency, showSpinner, amount, createOrder, totalGHS }) => {
+const ButtonWrapper = ({ currency, isLoading, amount, createOrder, totalGHS, setIsLoading }) => {
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
   const style = { layout: 'vertical' };
 
@@ -19,11 +16,11 @@ const ButtonWrapper = ({ currency, showSpinner, amount, createOrder, totalGHS })
         currency: currency,
       },
     });
-  }, [currency, showSpinner]);
+  }, [currency]);
 
   return (
     <>
-      {showSpinner && isPending && <Spinner />}
+      {isLoading && <Spinner />}
       <PayPalButtons
         style={style}
         disabled={false}
@@ -56,6 +53,8 @@ const ButtonWrapper = ({ currency, showSpinner, amount, createOrder, totalGHS })
               method: 1,
               userId: localStorage.getItem('hamfoodsUserId'),
             });
+            setIsLoading(false);
+            setOpen(false);
           });
         }}
       />

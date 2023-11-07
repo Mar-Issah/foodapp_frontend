@@ -135,15 +135,23 @@ const CartPage = () => {
               <ButtonWrapper
                 currency={currency}
                 products={products}
-                showSpinner={false}
                 amount={(rate * total).toFixed(2)}
                 totalGHS={total + serviceCost + deliveryCost}
                 createOrder={createOrder}
+                setIsLoading={setIsLoading}
+                isLoading={isLoading}
+                setOpen={setOpen}
               />
             </PayPalScriptProvider>
           ) : (
             products?.length !== 0 && (
-              <div className='mb-2' onClick={() => setOpen(true)}>
+              <div
+                className='mb-2'
+                onClick={() => {
+                  setIsLoading(true);
+                  setOpen(true);
+                }}
+              >
                 <Button label='CHECKOUT' />
               </div>
             )
@@ -154,6 +162,7 @@ const CartPage = () => {
                 onClick={() => {
                   setOpen(false);
                   setIsModalOpen(true);
+                  setIsLoading(false);
                 }}
               >
                 <Button label='PAY ON DELIVERY' />
