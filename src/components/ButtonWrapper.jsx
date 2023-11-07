@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { reset } from '@/redux/cartSlice';
 import axios from 'axios';
 import { APP_URL } from '@/lib/url';
+import Spinner from './Spinner';
 
 // Custom component to wrap the PayPalButtons and handle currency changes
 const ButtonWrapper = ({ currency, showSpinner, amount, createOrder, totalGHS }) => {
@@ -22,7 +23,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount, createOrder, totalGHS })
 
   return (
     <>
-      {showSpinner && isPending && <div className='spinner' />}
+      {showSpinner && isPending && <Spinner />}
       <PayPalButtons
         style={style}
         disabled={false}

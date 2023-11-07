@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useQuery } from 'react-query';
 import { APP_URL } from '@/lib/url';
+import { useRouter } from 'next/navigation';
 
 async function fetchData(userId) {
   const response = await fetch(`${APP_URL}/api/orders`);
@@ -25,6 +26,12 @@ const OrdersPage = () => {
   } = useQuery(['orders', userId], () => fetchData(userId), {
     staleTime: 300000,
   });
+  const router = useRouter();
+  const token = localStorage.getItem('hamfoodsToken');
+
+  if (!token) {
+    router.push('/');
+  }
 
   //format the mongodb date
   const formatDate = (date) => {
