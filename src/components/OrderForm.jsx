@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import Spinner from './Spinner';
 
-const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error }) => {
+const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error, isLoading, setIsLoading }) => {
   const [customer, setCustomer] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
 
   const handleClick = () => {
+    setIsLoading(true);
     createOrder({
       customer,
       address,
@@ -14,6 +16,7 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error }) => {
       method: 0,
       userId: localStorage.getItem('hamfoodsUserId'),
     });
+   
   };
   return (
     <div>
@@ -86,10 +89,10 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error }) => {
               </button>
               {(customer && phone && address) !== (undefined || '') && (
                 <button
-                  className='rounded-md px-4 py-2 bg-slate-200 hover:bg-slate-400 text-green-500'
+                  className='rounded-md px-4 py-2 bg-custom-orange hover:bg-transparent text-green-500'
                   onClick={handleClick}
                 >
-                  Order
+                  {isLoading ? <Spinner /> : 'Order'}
                 </button>
               )}
             </div>

@@ -15,16 +15,14 @@ const cartSlice = createSlice({
     },
     removeProduct: (state, action) => {
       const idToRemove = action.payload.id;
-
-      const removedProduct = state.products.find((product, idx) => idx === idToRemove);
-
+      const removedProduct = state.products.find((product) => product?.id === idToRemove);
       if (removedProduct) {
         // Calculate the quantity and total to be deducted
         const removedQuantity = removedProduct.quantity;
         const removedTotal = removedProduct.price * removedQuantity;
 
         // Update state based on the removed product
-        state.products = state.products.filter((product, idx) => idx !== idToRemove);
+        state.products = state.products.filter((product) => product?.id !== idToRemove);
         state.quantity -= removedQuantity;
         state.total -= removedTotal;
       }

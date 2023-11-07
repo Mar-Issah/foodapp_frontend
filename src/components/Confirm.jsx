@@ -8,6 +8,7 @@ const Confirm = ({ isConfirmModal, setIsConfirmModal }) => {
 
   const handleClose = () => {
     setIsConfirmModal(false);
+
     router.push(`/orders`);
   };
   return (

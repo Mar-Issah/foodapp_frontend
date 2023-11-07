@@ -23,6 +23,7 @@ const CartPage = () => {
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const { products, total, quantity } = useSelector((state) => state.cart);
   const [rate, setRate] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const token = localStorage.getItem('hamfoodsToken');
 
@@ -32,6 +33,7 @@ const CartPage = () => {
   const currency = 'USD';
   const dispatch = useDispatch();
   const serviceCost = 4.0;
+  const deliveryCost = 15.0;
 
   const convertCurrency = async () => {
     try {
@@ -60,9 +62,11 @@ const CartPage = () => {
         setIsModalOpen(false);
         dispatch(reset());
         setIsConfirmModal(true);
+        setIsLoading(false);
       }
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
       setError('Something went wrong, Please retry');
     }
   };
@@ -86,10 +90,7 @@ const CartPage = () => {
                 <Image src={product.img} alt='food' width={100} height={100} />
                 <h1 className='text-sm md:base uppercase font-bold w-56'>{product.title}</h1>
                 <h2 className='text-sm md:text-base font-bold'>{product.price.toFixed(2)}</h2>
-                <span
-                  className='cursor-pointer text-red ml-2'
-                  // onClick={() => handleRemoveProduct(idx)}
-                >
+                <span className='cursor-pointer text-red ml-2' onClick={() => handleRemoveProduct(product?.id)}>
                   <FontAwesomeIcon icon={faXmark} style={{ color: '#d51515' }} />
                 </span>
               </div>
@@ -109,18 +110,20 @@ const CartPage = () => {
           </div>
           <div className='flex justify-between'>
             <span className=''>Delivery Cost</span>
-            <span className='text-green-500 ml-2'>GH₵{(0.0).toFixed(2)}</span>
+            <span className='text-green-500 ml-2'>
+              GH₵{products?.length === 0 ? (0.0).toFixed(2) : deliveryCost.toFixed(2)}
+            </span>
           </div>
           <hr className='border-custom-orange' />
           <div className='flex justify-between text-custom-orange'>
             <span className=''>TOTAL(INCL. VAT)</span>
             <span className='font-bold ml-4'>
               {' '}
-              GH₵{products?.length === 0 ? (0.0).toFixed(2) : (total + serviceCost).toFixed(2)}
+              GH₵{products?.length === 0 ? (0.0).toFixed(2) : (total + serviceCost + deliveryCost).toFixed(2)}
             </span>
           </div>
 
-          {open ? (
+          {products?.length !== 0 && open ? (
             <PayPalScriptProvider
               options={{
                 'client-id': process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
@@ -132,15 +135,22 @@ const CartPage = () => {
               <ButtonWrapper
                 currency={currency}
                 products={products}
-                showSpinner={false}
                 amount={(rate * total).toFixed(2)}
-                totalGHS={total + serviceCost}
+                totalGHS={total + serviceCost + deliveryCost}
                 createOrder={createOrder}
+                setIsLoading={setIsLoading}
+                isLoading={isLoading}
               />
             </PayPalScriptProvider>
           ) : (
             products?.length !== 0 && (
-              <div className='mb-2' onClick={() => setOpen(true)}>
+              <div
+                className='mb-2'
+                onClick={() => {
+                  setIsLoading(true);
+                  setOpen(true);
+                }}
+              >
                 <Button label='CHECKOUT' />
               </div>
             )
@@ -151,6 +161,7 @@ const CartPage = () => {
                 onClick={() => {
                   setOpen(false);
                   setIsModalOpen(true);
+                  setIsLoading(false);
                 }}
               >
                 <Button label='PAY ON DELIVERY' />
@@ -161,11 +172,13 @@ const CartPage = () => {
         {isModalOpen && (
           <OrderForm
             error={error}
-            total={total + serviceCost}
+            total={total + serviceCost + deliveryCost}
             products={products}
             createOrder={createOrder}
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
           />
         )}
       </div>
