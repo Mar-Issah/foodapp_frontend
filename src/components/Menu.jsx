@@ -31,7 +31,7 @@ const Menu = ({ status }) => {
             </Link>
           ))}
 
-          {!token ? (
+          {status === 'unauthenticated' && !token ? (
             <Link href='/login' onClick={() => setOpen(false)}>
               Login
             </Link>

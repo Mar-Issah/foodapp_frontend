@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { useQuery } from 'react-query';
 import { APP_URL } from '@/lib/url';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 async function fetchData(userId) {
   const response = await fetch(`${APP_URL}/api/orders`);
@@ -29,7 +30,9 @@ const OrdersPage = () => {
   const router = useRouter();
   const token = localStorage.getItem('hamfoodsToken');
 
-  if (!token) {
+  const { status } = useSession();
+
+  if (!token && status === 'unauthenticated') {
     router.push('/');
   }
 
