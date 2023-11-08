@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
 import Confirm from '@/components/Confirm';
 import { APP_URL } from '@/lib/url';
 
@@ -26,8 +27,9 @@ const CartPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const token = localStorage.getItem('hamfoodsToken');
+  const { status } = useSession();
 
-  if (!token) {
+  if (!token && status === 'unauthenticated') {
     router.push('/menu');
   }
   const currency = 'USD';

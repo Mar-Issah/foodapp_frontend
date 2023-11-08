@@ -8,12 +8,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import styles from '@/styles/fonts.module.css';
 import { usePathname } from 'next/navigation';
+import { APP_URL } from '@/lib/url';
+import { useQuery } from 'react-query';
+import { useRouter } from 'next/navigation';
+
+async function fetchData(email) {
+  const response = await fetch(`${APP_URL}/api/auth/user/${email}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return response.json();
+}
 
 //Navbar components with links
 const Navbar = () => {
   const currentRoute = usePathname();
-  const { status } = useSession();
+  const { status, data } = useSession();
+  const email = data?.user?.email;
+  const { data: loggedUser, error } = useQuery(['product', email], () => fetchData(email));
+  if (status && loggedUser) {
+    localStorage.setItem('hamfoodsUserId', loggedUser._id);
+  }
   const token = localStorage.getItem('hamfoodsToken');
+  const router = useRouter();
 
   return (
     <div className='h-10 text-gray-100 p-4 flex items-center justify-between uppercase md:h-20 lg:px-17 xl:px-35'>
@@ -58,12 +75,13 @@ const Navbar = () => {
             </Link>
             <Cart currentRoute={currentRoute} />
             <Link
-              className={`hover:text-custom-orange pr-8`}
+              className={`hover:text-custom-orange mr-8`}
               href='/login'
               onClick={() => {
                 localStorage.removeItem('hamfoodsToken');
                 localStorage.removeItem('hamfoodsUserId');
                 signOut();
+                router.push('/login');
               }}
             >
               Logout

@@ -10,7 +10,6 @@ const handler = async (req, res) => {
     await connectMongodb();
     try {
       const body = await req.json();
-
       // Hash the password
       const hashedPassword = await bcrypt.hash(body.password, 10);
       const newBody = {

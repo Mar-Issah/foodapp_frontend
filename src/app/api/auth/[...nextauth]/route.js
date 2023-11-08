@@ -1,6 +1,7 @@
 import { connectMongodb } from '@/lib/mongodb';
 import User from '@/models/user';
 import NextAuth from 'next-auth';
+import { NextResponse } from 'next/server';
 import GoogleProvider from 'next-auth/providers/google';
 
 const authOptions = {
@@ -9,7 +10,6 @@ const authOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       checks: ['none'],
-      callbackUrl: '/',
       authorization: {
         params: {
           prompt: 'consent',
@@ -20,28 +20,31 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn(user, account, profile) {
-      if (account?.provider === 'google') {
-        const { email, fullname } = user;
-
-        try {
-          await connectMongodb();
-          let existingUser = await User.findOne({ email });
-          if (!existingUser) {
-            // If the user doesn't exist, create a new user in the database
-            existingUser = new User({
-              email,
-              fullname,
-            });
-            await existingUser.save();
-          }
-          // Continue with the sign-in process or return user data as needed
-          return Promise.resolve(true);
-        } catch (error) {
-          console.error('Error while creating or signing in the user:', error);
-          return Promise.resolve(false);
+    async signIn(user) {
+      await connectMongodb();
+      let newUser;
+      try {
+        const {
+          user: { name, email },
+          // account: { access_token },
+        } = user;
+        newUser = await User.findOne({ email });
+        if (!newUser) {
+          // If the user doesn't exist, create a new user in the database
+          const data = {
+            email,
+            fullname: name,
+          };
+          newUser = await User.create(data);
         }
+        return Promise.resolve(true);
+      } catch (error) {
+        console.error('Error while creating or signing in the user:', error);
+        return Promise.reject(new Error('Something went wrong!'));
       }
+    },
+    redirect: async (url, baseUrl) => {
+      return '/';
     },
   },
 };
