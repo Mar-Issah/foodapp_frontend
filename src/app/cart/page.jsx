@@ -77,8 +77,6 @@ const CartPage = () => {
     dispatch(removeProduct({ id: productId }));
   };
 
-  console.log(products);
-
   return (
     <div className='bg-custom-blueblack w-screen overflow-x-hidden'>
       <Navbar />

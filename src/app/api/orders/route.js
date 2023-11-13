@@ -19,7 +19,7 @@ export const GET = async (req) => {
   }
 };
 
-//Addd new order
+//Add a new order
 export const POST = async (request) => {
   const { method } = request;
   await connectMongodb();

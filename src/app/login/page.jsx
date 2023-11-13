@@ -16,6 +16,7 @@ const LoginPage = () => {
     <>
       <div className='flex flex-1 items-center justify-center h-screen w-screen'>
         <div className='w-screen h-screen flex flex-col md:flex-row '>
+          {/* left or top container with image */}
           <div className='relative h-1/3 w-full md:h-full'>
             <Image
               src='https://res.cloudinary.com/dytnpjxrd/image/upload/v1698600044/HAMFOODS/loginBG_dsh1jc.jpg'
@@ -31,6 +32,7 @@ const LoginPage = () => {
               </h1>
               <p>Log into your account or create a new one </p>
             </div>
+            {/* return the signin or sign up form based on user registration */}
             <div>
               {isRegister ? <Signup setRegister={setRegister} /> : <Signin />}
               {isRegister ? (
