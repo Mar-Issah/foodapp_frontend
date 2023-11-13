@@ -66,6 +66,7 @@ const OrdersPage = () => {
               </button>
             </div>
           ) : (
+            // IF ORDER SHOW THE TABLE BELOW
             <table className='text-sm w-full border-separate border-spacing-3 md:text-md lg:text-lg'>
               {orders?.length > 0 && (
                 <thead>
