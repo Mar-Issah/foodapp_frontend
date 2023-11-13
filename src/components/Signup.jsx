@@ -4,6 +4,7 @@ import axios from 'axios';
 import { APP_URL } from '@/lib/url';
 import Spinner from './Spinner';
 
+//signup form
 const Signup = ({ setRegister }) => {
   const [formData, setFormData] = useState({
     fullname: '',
