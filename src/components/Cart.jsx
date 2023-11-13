@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+//component that dsiply the cart icon and quantity in the navbar
 const CartIcon = ({ currentRoute }) => {
   const quantity = useSelector((state) => state.cart.quantity);
   return (

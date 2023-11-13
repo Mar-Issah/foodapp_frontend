@@ -2,8 +2,6 @@ import Product from '@/models/Product';
 import { NextResponse } from 'next/server';
 import { connectMongodb } from '@/lib/mongodb';
 
-// connectMongodb();
-
 // GET SINGLE PRODUCT
 export const GET = async (req, { params }) => {
   const { method } = req;

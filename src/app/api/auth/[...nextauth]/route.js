@@ -1,9 +1,9 @@
 import { connectMongodb } from '@/lib/mongodb';
 import User from '@/models/user';
 import NextAuth from 'next-auth';
-import { NextResponse } from 'next/server';
 import GoogleProvider from 'next-auth/providers/google';
 
+//google provider configurations
 const authOptions = {
   providers: [
     GoogleProvider({

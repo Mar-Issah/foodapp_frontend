@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
 
+//handler function for the signin api
 const handler = async (req, res) => {
   await connectMongodb();
   if (req.method === 'POST') {

@@ -49,6 +49,7 @@ const MenuPage = () => {
               Our Menu
             </h1>
           </div>
+          {/* RETURN THE LIST OF MENU */}
           <div className='lg:px-12 xl:px-35 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-center pb-20'>
             {menu?.map((item) => (
               <a href={`/product/${item?._id}`} key={item?._id} className='w-full h-1/3 bg-cover md:h-1/2'>

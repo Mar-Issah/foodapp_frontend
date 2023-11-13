@@ -4,6 +4,7 @@ import User from '@/models/user';
 import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
 
+//handler function for the signup api
 const handler = async (req, res) => {
   const { method } = req;
   if (method === 'POST') {

@@ -43,6 +43,7 @@ const ButtonWrapper = ({ currency, isLoading, amount, createOrder, totalGHS, set
               return orderId;
             });
         }}
+        //what happens when the transaction is approved
         onApprove={function (data, actions) {
           return actions.order.capture().then(function (details) {
             const shipping = details.purchase_units[0].shipping;

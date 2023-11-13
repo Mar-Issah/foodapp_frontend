@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Spinner from './Spinner';
 
+// a modal which contains the order form
 const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error, isLoading, setIsLoading }) => {
   const [customer, setCustomer] = useState('');
   const [address, setAddress] = useState('');
@@ -16,7 +17,6 @@ const Modal = ({ isModalOpen, setIsModalOpen, total, createOrder, error, isLoadi
       method: 0,
       userId: localStorage.getItem('hamfoodsUserId'),
     });
-   
   };
   return (
     <div>

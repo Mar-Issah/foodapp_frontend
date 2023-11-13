@@ -2,6 +2,7 @@ import { connectMongodb } from '@/lib/mongodb';
 import User from '@/models/user';
 import { NextResponse } from 'next/server';
 
+// function to create a user
 export async function POST(request) {
   const { email, name } = await request.json();
   await connectMongodb();

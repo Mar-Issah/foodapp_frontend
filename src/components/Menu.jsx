@@ -11,6 +11,7 @@ const links = [
   { id: 2, title: 'Menu', url: '/menu' },
 ];
 
+// navlinks for the mobile page
 const Menu = ({ status }) => {
   const [open, setOpen] = useState(false);
   const token = localStorage.getItem('hamfoodsToken');

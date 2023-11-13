@@ -3,6 +3,7 @@ import { signIn } from 'next-auth/react';
 import React from 'react';
 import Image from 'next/image';
 
+//component that retunrs the google btn on the login page
 const GoogleButton = () => {
   return (
     <button
