@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 const Welcome = () => {
   return (
+    // background image and text for the homepage
     <div className={`${styles.backgroundImage} overflow-hidden w-screen`}>
       <div className='relative z-10 h-screen'>
         <Notice />

@@ -1,5 +1,6 @@
 import React from 'react';
 
+//component for the loading spinner
 const Spinner = () => {
   return (
     <div className='px-4 py-2'>
