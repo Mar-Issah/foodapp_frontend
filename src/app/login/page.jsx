@@ -6,24 +6,11 @@ import styles from '@/styles/fonts.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import GoogleButton from '@/components/GoogleButton';
-import { getServerSession } from 'next-auth';
-import { getSession } from 'next-auth/next';
-import { redirect } from 'next/navigation';
 import Signup from '@/components/Signup';
 import Signin from '@/components/Signin';
-import axios from 'axios';
-import { APP_URL } from '@/lib/url';
-import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
   const [isRegister, setRegister] = useState(false);
-  const router = useRouter();
-  // const session = getServerSession();
-  // console.log(session);
-
-  // if (session) {
-  //   redirect('/');
-  // }
 
   return (
     <>
