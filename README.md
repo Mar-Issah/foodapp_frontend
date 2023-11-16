@@ -32,7 +32,42 @@ bun dev
 
 ## Usage
 
-## Contributing :family:
+<p align="center">
+  <img src="https://res.cloudinary.com/dytnpjxrd/image/upload/v1700089631/HAMFOODS/login_tj8gni.png" alt="Login" width="45%" style="margin-right: 10px;">
+  <img src="https://res.cloudinary.com/dytnpjxrd/image/upload/v1700089632/HAMFOODS/menu_page_hqotml.png" alt="Menu" width="45%">
+</p>
+<p align="center">
+  <strong>To access the Menu page and proceed with placing an order, start by visiting the Login page to sign up or sign in to your account. Users also have the alternative option of using their Google account for authentication.</strong>
+</p>
+
+<p align="center">
+  <img src="https://res.cloudinary.com/dytnpjxrd/image/upload/v1700089673/HAMFOODS/singleprodctpage_y8cvqz.png" alt="product" width="45%" style="margin-right: 10px;">
+  <img src="https://res.cloudinary.com/dytnpjxrd/image/upload/v1700089629/HAMFOODS/cart_yzxppo.png" alt="cart" width="45%">
+</p>
+
+<p align="center">
+  <strong>After clicking on a single product on the menu page, users will be automatically redirected to the Product page. Once they select the quantity and add the product to the cart, they can proceed to the cart page for payment processing.</strong>
+</p>
+
+<p align="center">
+  <img src="https://res.cloudinary.com/dytnpjxrd/image/upload/v1700089673/HAMFOODS/paypal_mqtnzm.png" alt="paypal" width="45%" style="margin-right: 10px;">
+  <img src="https://res.cloudinary.com/dytnpjxrd/image/upload/v1700089673/HAMFOODS/payondel_b9mwqp.png" alt="cash" width="45%">
+</p>
+
+<p align="center">
+  <strong>On the cart page, users have the option to choose between online payment or cash on delivery for completing their order.</strong>
+</p>
+
+<p align="center">
+  <img src="https://res.cloudinary.com/dytnpjxrd/image/upload/v1700097404/HAMFOODS/thanyou_ay5j7a.png" alt="confrim" width="45%" style="margin-right: 10px;">
+  <img src="https://res.cloudinary.com/dytnpjxrd/image/upload/v1700089652/HAMFOODS/orders_qsn8ac.png" alt="orders" width="45%">
+</p>
+
+<p align="center">
+  <strong>Once the payment information is submitted, users are redirected to the orders page to view the details and status of their completed order.</strong>
+</p>
+
+## Contributing:
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
