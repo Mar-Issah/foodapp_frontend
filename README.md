@@ -29,3 +29,22 @@ pnpm dev
 # or
 bun dev
 ```
+
+## Usage
+
+## Contributing :family:
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project.
+2. Create your Feature Branch (`git checkout -b feature/awesomeFeature`).
+3. Commit your Changes (`git commit -m 'Added some awesome features'`).
+4. Push to the Branch (`git push origin feature/awesomeFeature`).
+5. Open a Pull Request.
+   <br>
+
+<!-- LICENSE -->
+
+## License:
+
+Distributed under the `MIT License`. See [LICENSE](https://choosealicense.com/licenses/mit/) for more information.
