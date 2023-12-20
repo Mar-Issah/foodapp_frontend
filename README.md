@@ -16,7 +16,7 @@ The H.A.M foods Ordering Web App is a user-friendly online platform designed to 
 
 <br>
 
-## Getting Started
+## Getting Started:
 
 First, run the development server:
 
